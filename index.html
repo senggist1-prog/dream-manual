@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>드림금융컨설팅 업무메뉴얼</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* 사이드바 */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: #1a1f36;
+            color: #fff;
+            overflow-y: auto;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 28px 24px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .sidebar-header h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar-header p {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 4px;
+        }
+
+        .sidebar-nav {
+            padding: 16px 0;
+        }
+
+        .nav-category {
+            padding: 0 16px;
+            margin-bottom: 4px;
+        }
+
+        .nav-category-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.2s;
+            user-select: none;
+        }
+
+        .nav-category-title:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .nav-category-title.active {
+            background: rgba(79, 120, 255, 0.2);
+            color: #7ba0ff;
+        }
+
+        .nav-category-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .nav-category-arrow {
+            margin-left: auto;
+            font-size: 10px;
+            transition: transform 0.2s;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .nav-category-title.open .nav-category-arrow {
+            transform: rotate(90deg);
+        }
+
+        .nav-sub-list {
+            display: none;
+            padding: 2px 0 8px 42px;
+        }
+
+        .nav-sub-list.open {
+            display: block;
+        }
+
+        .nav-sub-item {
+            padding: 6px 12px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-sub-item:hover {
+            color: rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .nav-sub-item.active {
+            color: #7ba0ff;
+            background: rgba(79, 120, 255, 0.1);
+        }
+
+        /* 메인 컨텐츠 */
+        .main {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        .top-bar {
+            position: sticky;
+            top: 0;
+            background: rgba(245, 247, 250, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 40px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 50;
+        }
+
+        .breadcrumb {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .breadcrumb span {
+            color: #334155;
+            font-weight: 600;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 8px 14px;
+            width: 280px;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            font-size: 13px;
+            width: 100%;
+            color: #333;
+        }
+
+        .search-icon {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .content {
+            padding: 40px;
+            max-width: 900px;
+        }
+
+        /* 섹션 */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1f36;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-desc {
+            font-size: 15px;
+            color: #64748b;
+            margin-bottom: 36px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        /* 카드 */
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 20px;
+            border: 1px solid #e8ecf1;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .card h3 {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1a1f36;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card p, .card li {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.8;
+        }
+
+        .card ul, .card ol {
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+
+        .card li {
+            margin-bottom: 6px;
+        }
+
+        /* 태그/뱃지 */
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-blue { background: #eff6ff; color: #3b82f6; }
+        .badge-green { background: #f0fdf4; color: #16a34a; }
+        .badge-orange { background: #fff7ed; color: #ea580c; }
+        .badge-purple { background: #faf5ff; color: #9333ea; }
+        .badge-red { background: #fef2f2; color: #dc2626; }
+
+        /* 테이블 */
+        .table-wrap {
+            overflow-x: auto;
+            margin-top: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            background: #f8fafc;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            color: #475569;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+        }
+
+        tr:hover td {
+            background: #fafbfd;
+        }
+
+        /* 알림 박스 */
+        .notice {
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin: 16px 0;
+            font-size: 13px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .notice-info {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e40af;
+        }
+
+        .notice-warning {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            color: #92400e;
+        }
+
+        .notice-success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        /* 체크리스트 */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            color: #94a3b8;
+        }
+
+        /* 홈 대시보드 */
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .home-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e8ecf1;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .home-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-color: #c7d2fe;
+        }
+
+        .home-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 14px;
+        }
+
+        .home-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1f36;
+            margin-bottom: 6px;
+        }
+
+        .home-card p {
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .icon-blue { background: #eff6ff; }
+        .icon-green { background: #f0fdf4; }
+        .icon-orange { background: #fff7ed; }
+        .icon-purple { background: #faf5ff; }
+        .icon-red { background: #fef2f2; }
+
+        /* 준비중 표시 */
+        .coming-soon {
+            text-align: center;
+            padding: 60px 20px;
+            color: #94a3b8;
+        }
+
+        .coming-soon-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .coming-soon h3 {
+            font-size: 18px;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .coming-soon p {
+            font-size: 14px;
+        }
+
+        /* 모바일 햄버거 */
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            top: 14px;
+            left: 14px;
+            z-index: 200;
+            background: #1a1f36;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* 모바일 반응형 */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .mobile-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .top-bar {
+                padding: 16px 20px;
+                padding-left: 60px;
+            }
+
+            .content {
+                padding: 24px 20px;
+            }
+
+            .search-box {
+                width: 180px;
+            }
+
+            .home-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 스크롤바 */
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.15);
+            border-radius: 4px;
+        }
+
+        /* 인쇄 */
+        @media print {
+            .sidebar, .top-bar, .mobile-toggle { display: none; }
+            .main { margin-left: 0; }
+            .section { display: block !important; page-break-before: always; }
+            .section:first-child { page-break-before: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 모바일 메뉴 버튼 -->
+<button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+
+<!-- 사이드바 -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <h1>드림금융컨설팅</h1>
+        <p>업무메뉴얼 v1.0</p>
+    </div>
+    <nav class="sidebar-nav">
+        <!-- 홈 -->
+        <div class="nav-category">
+            <div class="nav-category-title active" onclick="showSection('home')">
+                <span class="nav-category-icon">🏠</span>
+                홈
+            </div>
+        </div>
+
+        <!-- 1. 입사 안내 -->
+        <div class="nav-category">
+            <div class="nav-category-title" onclick="toggleCategory(this)">
+                <span class="nav-category-icon">📋</span>
+                입사 안내
+                <span class="nav-category-arrow">▶</span>
+            </div>
+            <div class="nav-sub-list">
+                <div class="nav-sub-item" onclick="showSection('join-process')">입사 절차</div>
+                <div class="nav-sub-item" onclick="showSection('join-documents')">준비 서류</div>
+                <div class="nav-sub-item" onclick="showSection('join-firstday')">첫날 가이드</div>
+                <div class="nav-sub-item" onclick="showSection('join-systems')">시스템 세팅</div>
+            </div>
+        </div>
+
+        <!-- 2. 교육 -->
+        <div class="nav-category">
+            <div class="nav-category-title" onclick="toggleCategory(this)">
+                <span class="nav-category-icon">📚</span>
+                교육
+                <span class="nav-category-arrow">▶</span>
+            </div>
+            <div class="nav-sub-list">
+                <div class="nav-sub-item" onclick="showSection('edu-new')">신인 교육</div>
+                <div class="nav-sub-item" onclick="showSection('edu-product')">상품 교육</div>
+                <div class="nav-sub-item" onclick="showSection('edu-sales')">영업 교육</div>
+                <div class="nav-sub-item" onclick="showSection('edu-license')">자격증 안내</div>
+            </div>
+        </div>
+
+        <!-- 3. 보상체계 -->
+        <div class="nav-category">
+            <div class="nav-category-title" onclick="toggleCategory(this)">
+                <span class="nav-category-icon">💰</span>
+                보상체계
+                <span class="nav-category-arrow">▶</span>
+            </div>
+            <div class="nav-sub-list">
+                <div class="nav-sub-item" onclick="showSection('reward-commission')">수수료 체계</div>
+                <div class="nav-sub-item" onclick="showSection('reward-incentive')">인센티브</div>
+                <div class="nav-sub-item" onclick="showSection('reward-promotion')">승급 기준</div>
+                <div class="nav-sub-item" onclick="showSection('reward-benefit')">복리후생</div>
+            </div>
+        </div>
+
+        <!-- 4. 보험 컨텐츠 -->
+        <div class="nav-category">
+            <div class="nav-category-title" onclick="toggleCategory(this)">
+                <span class="nav-category-icon">🛡️</span>
+                보험 컨텐츠
+                <span class="nav-category-arrow">▶</span>
+            </div>
+            <div class="nav-sub-list">
+                <div class="nav-sub-item" onclick="showSection('ins-life')">생명보험</div>
+                <div class="nav-sub-item" onclick="showSection('ins-general')">손해보험</div>
+                <div class="nav-sub-item" onclick="showSection('ins-comparison')">상품 비교</div>
+                <div class="nav-sub-item" onclick="showSection('ins-case')">사례 모음</div>
+            </div>
+        </div>
+
+        <!-- 5. 업무 가이드 -->
+        <div class="nav-category">
+            <div class="nav-category-title" onclick="toggleCategory(this)">
+                <span class="nav-category-icon">⚙️</span>
+                업무 가이드
+                <span class="nav-category-arrow">▶</span>
+            </div>
+            <div class="nav-sub-list">
+                <div class="nav-sub-item" onclick="showSection('work-apply')">청약 절차</div>
+                <div class="nav-sub-item" onclick="showSection('work-underwriting')">언더라이팅</div>
+                <div class="nav-sub-item" onclick="showSection('work-claim')">보험금 청구</div>
+                <div class="nav-sub-item" onclick="showSection('work-complaint')">민원 처리</div>
+            </div>
+        </div>
+
+        <!-- 6. 회사 규정 -->
+        <div class="nav-category">
+            <div class="nav-category-title" onclick="toggleCategory(this)">
+                <span class="nav-category-icon">📌</span>
+                회사 규정
+                <span class="nav-category-arrow">▶</span>
+            </div>
+            <div class="nav-sub-list">
+                <div class="nav-sub-item" onclick="showSection('rule-compliance')">컴플라이언스</div>
+                <div class="nav-sub-item" onclick="showSection('rule-ethics')">윤리 규정</div>
+                <div class="nav-sub-item" onclick="showSection('rule-privacy')">개인정보보호</div>
+            </div>
+        </div>
+    </nav>
+</aside>
+
+<!-- 메인 -->
+<div class="main">
+    <div class="top-bar">
+        <div class="breadcrumb" id="breadcrumb">홈</div>
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="매뉴얼 검색..." id="searchInput" onkeyup="searchContent()">
+        </div>
+    </div>
+
+    <div class="content" id="content">
+
+        <!-- ==================== 홈 ==================== -->
+        <div class="section active" id="section-home">
+            <h2 class="section-title">드림금융컨설팅 업무메뉴얼</h2>
+            <p class="section-desc">드림금융컨설팅의 모든 업무 정보를 한 곳에서 확인하세요.</p>
+
+            <div class="home-grid">
+                <div class="home-card" onclick="showSection('join-process')">
+                    <div class="home-card-icon icon-blue">📋</div>
+                    <h3>입사 안내</h3>
+                    <p>입사 절차, 준비 서류, 첫날 가이드, 시스템 세팅까지</p>
+                </div>
+                <div class="home-card" onclick="showSection('edu-new')">
+                    <div class="home-card-icon icon-green">📚</div>
+                    <h3>교육</h3>
+                    <p>신인교육, 상품교육, 영업교육, 자격증 안내</p>
+                </div>
+                <div class="home-card" onclick="showSection('reward-commission')">
+                    <div class="home-card-icon icon-orange">💰</div>
+                    <h3>보상체계</h3>
+                    <p>수수료, 인센티브, 승급 기준, 복리후생</p>
+                </div>
+                <div class="home-card" onclick="showSection('ins-life')">
+                    <div class="home-card-icon icon-purple">🛡️</div>
+                    <h3>보험 컨텐츠</h3>
+                    <p>생명보험, 손해보험, 상품 비교, 사례 모음</p>
+                </div>
+                <div class="home-card" onclick="showSection('work-apply')">
+                    <div class="home-card-icon icon-red">⚙️</div>
+                    <h3>업무 가이드</h3>
+                    <p>청약, 언더라이팅, 보험금 청구, 민원 처리</p>
+                </div>
+                <div class="home-card" onclick="showSection('rule-compliance')">
+                    <div class="home-card-icon icon-blue">📌</div>
+                    <h3>회사 규정</h3>
+                    <p>컴플라이언스, 윤리규정, 개인정보보호</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 입사 안내 ==================== -->
+        <div class="section" id="section-join-process">
+            <h2 class="section-title">입사 절차</h2>
+            <p class="section-desc">드림금융컨설팅 입사부터 정착까지의 전체 과정을 안내합니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">📝</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-join-documents">
+            <h2 class="section-title">준비 서류</h2>
+            <p class="section-desc">입사 시 필요한 서류 목록과 제출 방법을 안내합니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">📄</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-join-firstday">
+            <h2 class="section-title">첫날 가이드</h2>
+            <p class="section-desc">입사 첫날 알아야 할 모든 것을 정리했습니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">🎯</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-join-systems">
+            <h2 class="section-title">시스템 세팅</h2>
+            <p class="section-desc">업무에 필요한 시스템 설치 및 설정 가이드입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">💻</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <!-- ==================== 교육 ==================== -->
+        <div class="section" id="section-edu-new">
+            <h2 class="section-title">신인 교육</h2>
+            <p class="section-desc">신규 입사자를 위한 필수 교육 과정입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">🎓</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-edu-product">
+            <h2 class="section-title">상품 교육</h2>
+            <p class="section-desc">취급 보험 상품에 대한 상세 교육 자료입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">📦</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-edu-sales">
+            <h2 class="section-title">영업 교육</h2>
+            <p class="section-desc">효과적인 영업 기법과 고객 상담 노하우입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">💬</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-edu-license">
+            <h2 class="section-title">자격증 안내</h2>
+            <p class="section-desc">보험 관련 자격증 취득 가이드입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">🏆</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <!-- ==================== 보상체계 ==================== -->
+        <div class="section" id="section-reward-commission">
+            <h2 class="section-title">수수료 체계</h2>
+            <p class="section-desc">보험 종목별 수수료 구조와 지급 기준입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">💵</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-reward-incentive">
+            <h2 class="section-title">인센티브</h2>
+            <p class="section-desc">실적 기반 인센티브 및 보너스 제도입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">🎁</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-reward-promotion">
+            <h2 class="section-title">승급 기준</h2>
+            <p class="section-desc">직급별 승급 요건과 경력 개발 경로입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">📈</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-reward-benefit">
+            <h2 class="section-title">복리후생</h2>
+            <p class="section-desc">회사에서 제공하는 복리후생 혜택입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">🏖️</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <!-- ==================== 보험 컨텐츠 ==================== -->
+        <div class="section" id="section-ins-life">
+            <h2 class="section-title">생명보험</h2>
+            <p class="section-desc">생명보험 상품 종류와 핵심 내용 정리입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">❤️</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-ins-general">
+            <h2 class="section-title">손해보험</h2>
+            <p class="section-desc">손해보험 상품 종류와 핵심 내용 정리입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">🔧</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-ins-comparison">
+            <h2 class="section-title">상품 비교</h2>
+            <p class="section-desc">보험사별/상품별 비교 분석 자료입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">⚖️</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-ins-case">
+            <h2 class="section-title">사례 모음</h2>
+            <p class="section-desc">실제 상담 및 보상 사례를 정리한 자료입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">📖</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <!-- ==================== 업무 가이드 ==================== -->
+        <div class="section" id="section-work-apply">
+            <h2 class="section-title">청약 절차</h2>
+            <p class="section-desc">보험 청약부터 완료까지의 업무 프로세스입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">✍️</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-work-underwriting">
+            <h2 class="section-title">언더라이팅</h2>
+            <p class="section-desc">심사 기준과 유의사항 안내입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">🔍</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-work-claim">
+            <h2 class="section-title">보험금 청구</h2>
+            <p class="section-desc">보험금 청구 절차와 필요 서류 안내입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">💳</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-work-complaint">
+            <h2 class="section-title">민원 처리</h2>
+            <p class="section-desc">고객 민원 접수 및 처리 절차입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">📞</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <!-- ==================== 회사 규정 ==================== -->
+        <div class="section" id="section-rule-compliance">
+            <h2 class="section-title">컴플라이언스</h2>
+            <p class="section-desc">보험업법 및 내부통제 관련 규정입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">⚖️</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-rule-ethics">
+            <h2 class="section-title">윤리 규정</h2>
+            <p class="section-desc">윤리강령 및 행동규범입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">🤝</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-rule-privacy">
+            <h2 class="section-title">개인정보보호</h2>
+            <p class="section-desc">고객 개인정보 보호 규정 및 가이드라인입니다.</p>
+
+            <div class="coming-soon">
+                <div class="coming-soon-icon">🔒</div>
+                <h3>컨텐츠 준비 중</h3>
+                <p>자료가 취합되면 내용이 채워집니다.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // 섹션 이름 매핑
+    const sectionNames = {
+        'home': '홈',
+        'join-process': '입사 안내 > 입사 절차',
+        'join-documents': '입사 안내 > 준비 서류',
+        'join-firstday': '입사 안내 > 첫날 가이드',
+        'join-systems': '입사 안내 > 시스템 세팅',
+        'edu-new': '교육 > 신인 교육',
+        'edu-product': '교육 > 상품 교육',
+        'edu-sales': '교육 > 영업 교육',
+        'edu-license': '교육 > 자격증 안내',
+        'reward-commission': '보상체계 > 수수료 체계',
+        'reward-incentive': '보상체계 > 인센티브',
+        'reward-promotion': '보상체계 > 승급 기준',
+        'reward-benefit': '보상체계 > 복리후생',
+        'ins-life': '보험 컨텐츠 > 생명보험',
+        'ins-general': '보험 컨텐츠 > 손해보험',
+        'ins-comparison': '보험 컨텐츠 > 상품 비교',
+        'ins-case': '보험 컨텐츠 > 사례 모음',
+        'work-apply': '업무 가이드 > 청약 절차',
+        'work-underwriting': '업무 가이드 > 언더라이팅',
+        'work-claim': '업무 가이드 > 보험금 청구',
+        'work-complaint': '업무 가이드 > 민원 처리',
+        'rule-compliance': '회사 규정 > 컴플라이언스',
+        'rule-ethics': '회사 규정 > 윤리 규정',
+        'rule-privacy': '회사 규정 > 개인정보보호'
+    };
+
+    // 섹션 보여주기
+    function showSection(id) {
+        // 모든 섹션 숨기기
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
+        // 선택한 섹션 보여주기
+        const section = document.getElementById('section-' + id);
+        if (section) section.classList.add('active');
+
+        // 브레드크럼 업데이트
+        const name = sectionNames[id] || id;
+        document.getElementById('breadcrumb').innerHTML = name.replace(' > ', ' <span style="color:#cbd5e1;margin:0 6px">›</span> ');
+
+        // 네비게이션 활성화
+        document.querySelectorAll('.nav-category-title').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.nav-sub-item').forEach(s => s.classList.remove('active'));
+
+        if (id === 'home') {
+            document.querySelector('.nav-category-title').classList.add('active');
+        } else {
+            // 해당 서브 아이템 활성화
+            document.querySelectorAll('.nav-sub-item').forEach(item => {
+                if (item.getAttribute('onclick') === "showSection('" + id + "')") {
+                    item.classList.add('active');
+                    // 부모 카테고리 열기
+                    const subList = item.parentElement;
+                    subList.classList.add('open');
+                    const categoryTitle = subList.previousElementSibling;
+                    categoryTitle.classList.add('active');
+                    categoryTitle.classList.add('open');
+                }
+            });
+        }
+
+        // 모바일: 사이드바 닫기
+        document.getElementById('sidebar').classList.remove('open');
+
+        // 스크롤 맨 위로
+        window.scrollTo(0, 0);
+    }
+
+    // 카테고리 토글
+    function toggleCategory(el) {
+        const subList = el.nextElementSibling;
+        const isOpen = subList.classList.contains('open');
+
+        if (isOpen) {
+            subList.classList.remove('open');
+            el.classList.remove('open');
+        } else {
+            subList.classList.add('open');
+            el.classList.add('open');
+        }
+    }
+
+    // 모바일 사이드바 토글
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    // 검색
+    function searchContent() {
+        const query = document.getElementById('searchInput').value.toLowerCase().trim();
+        if (!query) return;
+
+        const results = [];
+        document.querySelectorAll('.section').forEach(section => {
+            const text = section.textContent.toLowerCase();
+            if (text.includes(query)) {
+                const id = section.id.replace('section-', '');
+                const name = sectionNames[id];
+                if (name && id !== 'home') {
+                    results.push({ id, name });
+                }
+            }
+        });
+
+        if (results.length > 0) {
+            showSection(results[0].id);
+        }
+    }
+
+    // Enter로 검색
+    document.getElementById('searchInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') searchContent();
+    });
+</script>
+
+</body>
+</html>
