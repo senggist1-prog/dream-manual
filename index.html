@@ -577,6 +577,23 @@
             </div>
         </div>
 
+        <!-- 영업 -->
+        <div class="nav-category">
+            <div class="nav-category-title" onclick="toggleCategory(this)">
+                <span class="nav-category-icon">🔥</span>
+                영업
+                <span class="nav-category-arrow">▶</span>
+            </div>
+            <div class="nav-sub-list">
+                <div class="nav-sub-item" onclick="showSection('sales-db')">DB영업</div>
+                <div class="nav-sub-item" onclick="showSection('sales-ta')">TA 스크립트</div>
+                <div class="nav-sub-item" onclick="showSection('sales-reject')">거절처리 화법</div>
+                <div class="nav-sub-item" onclick="showSection('sales-ap-script')">AP 스크립트</div>
+                <div class="nav-sub-item" onclick="showSection('sales-ap-material')">AP 자료</div>
+                <div class="nav-sub-item" onclick="showSection('sales-closing')">클로징</div>
+            </div>
+        </div>
+
         <!-- 5. 업무 가이드 -->
         <div class="nav-category">
             <div class="nav-category-title" onclick="toggleCategory(this)">
@@ -645,6 +662,11 @@
                     <div class="home-card-icon icon-purple">🛡️</div>
                     <h3>보험 컨텐츠</h3>
                     <p>생명보험, 손해보험, 상품 비교, 사례 모음</p>
+                </div>
+                <div class="home-card" onclick="showSection('sales-db')">
+                    <div class="home-card-icon icon-red">🔥</div>
+                    <h3>영업</h3>
+                    <p>DB영업, TA스크립트, 거절처리, AP, 클로징</p>
                 </div>
                 <div class="home-card" onclick="showSection('work-apply')">
                     <div class="home-card-icon icon-red">⚙️</div>
@@ -1670,6 +1692,595 @@
             </div>
         </div>
 
+        <!-- ==================== 영업 ==================== -->
+
+        <!-- DB영업 -->
+        <div class="section" id="section-sales-db">
+            <h2 class="section-title">DB영업</h2>
+            <p class="section-desc">DB 수령부터 계약까지, 효율적인 DB영업 프로세스와 관리법입니다.</p>
+
+            <div class="card">
+                <h3>📋 DB영업 전체 프로세스</h3>
+                <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-top:12px; font-size:12px;">
+                    <span style="background:#eff6ff; padding:5px 12px; border-radius:16px; color:#1e40af; font-weight:600;">DB 수령</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#eff6ff; padding:5px 12px; border-radius:16px; color:#1e40af; font-weight:600;">분류/우선순위</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#fff7ed; padding:5px 12px; border-radius:16px; color:#ea580c; font-weight:600;">콜 시도</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#fff7ed; padding:5px 12px; border-radius:16px; color:#ea580c; font-weight:600;">TA (약속)</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#faf5ff; padding:5px 12px; border-radius:16px; color:#9333ea; font-weight:600;">AP (상담)</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#f0fdf4; padding:5px 12px; border-radius:16px; color:#16a34a; font-weight:600;">클로징</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#f0fdf4; padding:5px 12px; border-radius:16px; color:#16a34a; font-weight:600;">계약</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#f0fdf4; padding:5px 12px; border-radius:16px; color:#16a34a; font-weight:600;">사후관리</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📊 DB 유형별 특성</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>DB 유형</th><th>관심도</th><th>단가</th><th>전환율</th><th>특징</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="badge badge-red">실시간 DB</span></td><td>최고</td><td>5천~2만원</td><td>5~15%</td><td>방금 문의한 고객, <strong>즉시 콜 필수</strong></td></tr>
+                            <tr><td><span class="badge badge-orange">준실시간 DB</span></td><td>높음</td><td>2천~5천원</td><td>3~8%</td><td>당일~1일 이내 문의</td></tr>
+                            <tr><td><span class="badge badge-blue">일반 DB</span></td><td>보통</td><td>500~2천원</td><td>1~3%</td><td>1주일 이내 문의</td></tr>
+                            <tr><td><span class="badge badge-purple">구 DB</span></td><td>낮음</td><td>100~500원</td><td>0.5~1%</td><td>1개월 이상 경과</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>💰 DB 비용 관리법</h3>
+                <div style="background:#f8fafc; border-radius:8px; padding:16px; margin-top:8px; font-size:13px;">
+                    <p><strong>월 DB 예산 공식:</strong></p>
+                    <p style="margin-top:8px; color:#3b82f6; font-weight:600;">목표 계약 건수 ÷ 전환율 = 필요 DB 수량 × DB 단가 = 월 예산</p>
+                    <p style="margin-top:4px; color:#94a3b8; font-size:12px;">예: 월 5건 목표, 전환율 5% → 100건 필요 × 2,000원 = 20만원</p>
+                </div>
+                <h4 style="margin-top:16px; font-size:14px; font-weight:600; color:#1a1f36;">전환율 관리 지표</h4>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>지표</th><th>목표</th></tr></thead>
+                        <tbody>
+                            <tr><td>콜 시도 → 연결률</td><td>30% 이상</td></tr>
+                            <tr><td>연결 → TA 전환율</td><td>20% 이상</td></tr>
+                            <tr><td>TA → AP 전환율</td><td>70% 이상</td></tr>
+                            <tr><td>AP → 계약 전환율</td><td>40% 이상</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🎯 DB 고객 분류법 (4단계)</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>등급</th><th>상태</th><th>액션</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="badge badge-red">A</span></td><td>즉시 연결 + 상담 의사 있음</td><td>당일 TA 확정</td></tr>
+                            <tr><td><span class="badge badge-orange">B</span></td><td>연결됐으나 지금 바쁨</td><td>재연락 시간 약속</td></tr>
+                            <tr><td><span class="badge badge-blue">C</span></td><td>연결 안됨</td><td>문자 발송 후 3회 재시도</td></tr>
+                            <tr><td><span class="badge badge-purple">D</span></td><td>거절/수신거부</td><td>제외</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>⏰ 콜 타이밍 전략</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>시간대</th><th>연결률</th><th>전략</th></tr></thead>
+                        <tbody>
+                            <tr><td>09:00~10:00</td><td>★☆☆☆☆</td><td>출근 직후 바쁨, 콜 자제</td></tr>
+                            <tr><td>10:00~12:00</td><td>★★★☆☆</td><td>오전 업무 안정 후, 차분한 톤</td></tr>
+                            <tr><td>12:00~13:00</td><td>★★☆☆☆</td><td>점심시간, 가볍게 시도</td></tr>
+                            <tr><td>14:00~17:00</td><td>★★★★☆</td><td>오후 집중 시간, 자신감 있게</td></tr>
+                            <tr><td style="color:#dc2626; font-weight:600;">17:00~18:30</td><td>★★★★★</td><td><strong>최적! 퇴근 무렵 여유 생김</strong></td></tr>
+                            <tr><td>20:00 이후</td><td>⛔</td><td>콜 금지 (민원 위험)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="notice notice-info" style="margin-top:12px;">
+                    💡 <strong>요일별:</strong> 월요일 오전 자제 / 화~목 최적 / 금요일 오후 일찍<br>
+                    💡 <strong>실시간 DB:</strong> 수령 즉시 → 1시간 이내 콜 (늦을수록 전환율 급락!)
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>💡 성공률 높이는 6가지 팁</h3>
+                <ol>
+                    <li><strong>첫 콜 신뢰감:</strong> 회사명 + 이름 + 목적을 간결하고 밝게</li>
+                    <li><strong>3회 원칙:</strong> 연결 안되면 문자 후 다른 시간대에 3회까지</li>
+                    <li><strong>문자 활용:</strong> "안녕하세요, OOO님. 드림금융 OOO입니다. 보험 상담 문의 주셨는데 통화 가능하신가요?"</li>
+                    <li><strong>CRM 기록:</strong> 매 콜 후 반응·재콜 시간 기록 철저히</li>
+                    <li><strong>멀티콜 금지:</strong> 한 고객과 충분히 대화, 급하게 많이 하지 말 것</li>
+                    <li><strong>목소리 관리:</strong> 서서 콜하면 톤 올라감, 미소 짓고 통화</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- TA 스크립트 -->
+        <div class="section" id="section-sales-ta">
+            <h2 class="section-title">TA 스크립트</h2>
+            <p class="section-desc">전화 약속잡기(Telephone Approach) 실전 스크립트입니다.</p>
+
+            <div class="card">
+                <h3>📞 TA 기본 구조 (약 2분)</h3>
+                <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-top:12px; font-size:12px;">
+                    <span style="background:#eff6ff; padding:5px 12px; border-radius:16px; color:#1e40af; font-weight:600;">인사·자기소개 (15초)</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#eff6ff; padding:5px 12px; border-radius:16px; color:#1e40af; font-weight:600;">목적 소개 (15초)</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#fff7ed; padding:5px 12px; border-radius:16px; color:#ea580c; font-weight:600;">니즈 확인 (30초)</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#f0fdf4; padding:5px 12px; border-radius:16px; color:#16a34a; font-weight:600;">약속 잡기 (30초)</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#f0fdf4; padding:5px 12px; border-radius:16px; color:#16a34a; font-weight:600;">마무리 (15초)</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📝 실전 TA 스크립트 (DB 고객)</h3>
+
+                <h4 style="margin-top:12px; font-size:14px; font-weight:600; color:#3b82f6;">1단계: 오프닝</h4>
+                <div style="background:#f8fafc; border-radius:8px; padding:16px; margin-top:8px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"안녕하세요, <strong>OOO 고객님!</strong> 저는 드림금융컨설팅 소속 <strong>OOO</strong>이라고 합니다."</p>
+                    <p>"혹시 지난번에 보험 관련해서 상담 신청해주셨던 거 맞으실까요?"</p>
+                    <p style="color:#94a3b8;">(고객 확인 후)</p>
+                    <p>"바쁘신 시간에 잠깐 통화해도 될까요? <strong>2~3분이면 됩니다.</strong>"</p>
+                </div>
+
+                <h4 style="margin-top:20px; font-size:14px; font-weight:600; color:#3b82f6;">2단계: 목적 소개</h4>
+                <div style="background:#f8fafc; border-radius:8px; padding:16px; margin-top:8px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"저희가 지금 고객분들의 <strong>보장 공백이나 과다한 보험료</strong> 부분을 무료로 점검해드리는 서비스를 진행 중인데요."</p>
+                    <p>"따로 가입 압박은 전혀 없고요, 지금 가입하신 보험이 제대로 되어 있는지 <strong>확인만</strong> 해드리려고요."</p>
+                </div>
+
+                <h4 style="margin-top:20px; font-size:14px; font-weight:600; color:#3b82f6;">3단계: 니즈 확인</h4>
+                <div style="background:#f8fafc; border-radius:8px; padding:16px; margin-top:8px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"혹시 OOO님, 지금 보험이 몇 개 정도 있으세요?"</p>
+                    <p style="color:#94a3b8;">(반응 확인 후)</p>
+                    <p>"아, 그러세요. 혹시 보험료가 얼마나 나가는지 대략 아세요?"</p>
+                </div>
+
+                <h4 style="margin-top:20px; font-size:14px; font-weight:600; color:#16a34a;">4단계: 약속 잡기</h4>
+                <div style="background:#f0fdf4; border-radius:8px; padding:16px; margin-top:8px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"제가 직접 찾아뵙고 <strong>30분 정도만</strong> 같이 보면서 딱 정리해드릴 수 있거든요."</p>
+                    <p>"이번 주 아니면 다음 주에 괜찮으신 날 있으세요?"</p>
+                    <p style="color:#94a3b8;">(고객 반응 후)</p>
+                    <p>"그럼 <strong>O요일 O시</strong>는 어떠세요? 회사 쪽으로 가도 되고 댁으로 가도 되는데 어디가 편하세요?"</p>
+                </div>
+
+                <h4 style="margin-top:20px; font-size:14px; font-weight:600; color:#16a34a;">5단계: 마무리</h4>
+                <div style="background:#f0fdf4; border-radius:8px; padding:16px; margin-top:8px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"<strong>O요일 O시에 OOO</strong>로 찾아뵙겠습니다."</p>
+                    <p>"도착 10분 전에 한번 연락드리겠습니다. 오늘 통화해주셔서 감사합니다!"</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🔄 상황별 대응 스크립트</h3>
+
+                <h4 style="margin-top:12px; font-size:13px; font-weight:600; color:#ea580c;">"어디서 번호 얻으셨어요?"</h4>
+                <div style="background:#fff7ed; border-radius:8px; padding:12px; margin:8px 0 16px; font-size:13px; color:#475569;">
+                    "아, 네. OOO님께서 인터넷에서 보험 비교 신청을 해주신 게 저희쪽으로 연결이 됐어요. 제가 그 상담을 담당하게 됐습니다."
+                </div>
+
+                <h4 style="font-size:13px; font-weight:600; color:#ea580c;">"지금 바빠요"</h4>
+                <div style="background:#fff7ed; border-radius:8px; padding:12px; margin:8px 0 16px; font-size:13px; color:#475569;">
+                    "그럼 오늘 오후 6시 이후에는 좀 괜찮으세요? 아니면 내일 언제가 편하세요? <strong>딱 3분만</strong> 시간 내주시면 됩니다."
+                </div>
+
+                <h4 style="font-size:13px; font-weight:600; color:#ea580c;">"어떤 보험이에요?"</h4>
+                <div style="background:#fff7ed; border-radius:8px; padding:12px; margin:8px 0 16px; font-size:13px; color:#475569;">
+                    "특정 상품 권유가 아니고요, 고객님 상황에 맞게 지금 보장이 잘 되어 있는지 <strong>전반적으로 점검</strong>해드리려는 겁니다. 어떤 회사 상품이든 다 비교해드릴 수 있어요."
+                </div>
+
+                <h4 style="font-size:13px; font-weight:600; color:#ea580c;">문자 먼저 보낸 후 콜</h4>
+                <div style="background:#fff7ed; border-radius:8px; padding:12px; margin:8px 0; font-size:13px; color:#475569;">
+                    "안녕하세요, OOO님. 아까 문자 드렸던 드림금융 OOO예요. 혹시 문자 보셨어요? 보험 점검 관련해서 잠깐 말씀 나눠도 될까요?"
+                </div>
+            </div>
+        </div>
+
+        <!-- 거절처리 화법 -->
+        <div class="section" id="section-sales-reject">
+            <h2 class="section-title">거절처리 화법</h2>
+            <p class="section-desc">거절 유형별 실전 대응 스크립트 — F·A·B·E 공식 (공감 → 인정 → 전환 → 근거)</p>
+
+            <div class="card" style="border-left:4px solid #dc2626;">
+                <h3>🚫 "안 할래요 / 필요 없어요"</h3>
+                <div style="background:#f8fafc; border-radius:8px; padding:16px; margin-top:12px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"아, 그러세요. 혹시 지금 보험이 충분하게 있으신 건가요, 아니면 보험 자체가 별로 필요하지 않으시다고 생각하세요?"</p>
+                    <p style="color:#94a3b8;">(이유 파악 후)</p>
+                    <p>"충분히 이해합니다. 저도 강매하려는 게 아니고요, 저희가 GA라서 <strong>여러 회사 상품을 다 비교</strong>해드릴 수 있거든요. 딱 30분만 보여드리고, 필요 없으시면 그냥 가면 되거든요."</p>
+                </div>
+            </div>
+
+            <div class="card" style="border-left:4px solid #ea580c;">
+                <h3>👤 "지인한테 할 거예요"</h3>
+                <div style="background:#f8fafc; border-radius:8px; padding:16px; margin-top:12px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"아, 네. 당연하죠! 아는 분한테 하시는 게 더 편하실 수 있죠. 근데 한 가지만 여쭤봐도 될까요?"</p>
+                    <p>"지인 설계사분이 <strong>여러 보험회사 상품을 같이 비교</strong>해서 알려주시나요? 아니면 한 회사만 소속이세요?"</p>
+                    <p>"저는 20개 이상 회사를 다 비교할 수 있는 GA 소속이라서요, 같이 비교해보시고 그 이후에 결정하셔도 늦지 않아요. 제가 드린 비교 자료 가지고 가시면 <strong>더 좋은 조건</strong>으로 가입하실 수도 있거든요."</p>
+                </div>
+            </div>
+
+            <div class="card" style="border-left:4px solid #9333ea;">
+                <h3>✅ "이미 보장분석 받았어요 / 다 있어요"</h3>
+                <div style="background:#f8fafc; border-radius:8px; padding:16px; margin-top:12px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"아, 이미 있으세요? 잘 됐네요! 혹시 지금 보험이 얼마나 되는지 아세요?"</p>
+                    <p>"보험료는 많이 내시는데 정작 필요한 데는 보장이 안 되는 경우가 많더라고요. 특히 <strong>실손 중복이나 암보험 부족</strong> 같은 경우요."</p>
+                    <p>"지금 가지고 계신 거 한번 점검해드리면, <strong>보험료 줄일 수 있는 방법</strong>이 나올 수도 있어요. 돈 아끼는 거니까 손해는 없잖아요?"</p>
+                </div>
+            </div>
+
+            <div class="card" style="border-left:4px solid #3b82f6;">
+                <h3>😤 "보험 싫어요 / 믿을 수 없어요"</h3>
+                <div style="background:#f8fafc; border-radius:8px; padding:16px; margin-top:12px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"충분히 이해해요. 혹시 전에 안 좋은 경험이 있으셨나요?"</p>
+                    <p style="color:#94a3b8;">(경청)</p>
+                    <p>"맞아요. 예전에 불완전판매도 많았고 보험금 안 나온다는 얘기도 많았죠. 근데 요즘은 금감원 규제도 강해지고 소비자 보호도 많이 달라졌거든요."</p>
+                    <p>"보험이 싫으신 게 아니라 <strong>그런 나쁜 경험이 싫으신 거</strong>잖아요. 제가 투명하게 알려드릴게요."</p>
+                </div>
+            </div>
+
+            <div class="card" style="border-left:4px solid #f59e0b;">
+                <h3>⏰ "나중에 할게요"</h3>
+                <div style="background:#f8fafc; border-radius:8px; padding:16px; margin-top:12px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"나중에요? 혹시 언제쯤 생각하고 계세요?"</p>
+                    <p>"보험은 <strong>'지금 건강할 때'</strong> 가입하는 게 핵심이에요. 나중에 몸에 이상이 생기면 아예 가입이 안 되거나, 그 부분은 보장이 안 되거든요."</p>
+                    <p>"지금 딱 30분만 투자하셔서 <strong>상황 파악만</strong> 해두시면, 나중에 바로 행동하실 수 있잖아요."</p>
+                </div>
+            </div>
+
+            <div class="card" style="border-left:4px solid #16a34a;">
+                <h3>💸 "돈 없어요 / 여유 없어요"</h3>
+                <div style="background:#f8fafc; border-radius:8px; padding:16px; margin-top:12px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"요즘 경기가 어렵죠. 충분히 이해해요. 혹시 지금 나가고 있는 보험이 있으세요?"</p>
+                    <p style="color:#94a3b8;">(있다면)</p>
+                    <p>"지금 내시는 보험료 줄이면서 보장은 그대로 유지하는 방법이 있거든요. 실제로 <strong>월 3~5만원 줄여드린 경우</strong>가 꽤 있었어요."</p>
+                    <p style="color:#94a3b8;">(없다면)</p>
+                    <p>"보험이 아예 없으신 게 더 걱정이에요. 아플 때 비용이 훨씬 크거든요. <strong>월 2~3만원</strong>으로 시작할 수 있는 것도 있습니다."</p>
+                </div>
+            </div>
+
+            <div class="card" style="border-left:4px solid #64748b;">
+                <h3>🤔 "생각해볼게요"</h3>
+                <div style="background:#f8fafc; border-radius:8px; padding:16px; margin-top:12px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"네, 물론이죠. 근데 혹시 어떤 부분이 더 생각해보고 싶으세요? <strong>보장 내용인지, 보험료인지, 다른 분과 상의</strong>가 필요하신 건지요."</p>
+                    <p style="color:#94a3b8;">(이유 확인 후 해당 부분만 집중 설명)</p>
+                    <p>"이 부분 해결되시면 결정하실 수 있을 것 같으세요?"</p>
+                </div>
+            </div>
+
+            <div class="card" style="border-left:4px solid #0ea5e9;">
+                <h3>🆓 "무료로 왜 해주는 거에요?"</h3>
+                <div style="background:#f8fafc; border-radius:8px; padding:16px; margin-top:12px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"좋은 질문이에요! 솔직히 말씀드리면, 저도 보험 설계사라서 <strong>고객님한테 맞는 보장이 있으면 제안</strong>을 드리긴 합니다."</p>
+                    <p>"근데 점검 후에 잘 되어 있으시면 그냥 '잘 하고 계세요' 하고 끝이에요. 가입은 고객님이 결정하시는 거고, 저는 정보를 드리는 역할이거든요."</p>
+                    <p>"오히려 이렇게 투명하게 말씀드리는 게 <strong>신뢰</strong>가 되지 않을까요?"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AP 스크립트 -->
+        <div class="section" id="section-sales-ap-script">
+            <h2 class="section-title">AP 스크립트</h2>
+            <p class="section-desc">초회상담(Approach) 실전 스크립트 — 아이스브레이킹부터 니즈환기까지</p>
+
+            <div class="card">
+                <h3>📋 AP 전체 플로우</h3>
+                <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-top:12px; font-size:12px;">
+                    <span style="background:#eff6ff; padding:5px 12px; border-radius:16px; color:#1e40af; font-weight:600;">아이스브레이킹 (5~10분)</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#eff6ff; padding:5px 12px; border-radius:16px; color:#1e40af; font-weight:600;">상담 목적 안내 (2분)</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#fff7ed; padding:5px 12px; border-radius:16px; color:#ea580c; font-weight:600;">팩트파인딩 FF (15분)</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#faf5ff; padding:5px 12px; border-radius:16px; color:#9333ea; font-weight:600;">니즈환기 (15분)</span>
+                    <span style="color:#cbd5e1;">→</span>
+                    <span style="background:#f0fdf4; padding:5px 12px; border-radius:16px; color:#16a34a; font-weight:600;">다음 약속</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🤝 아이스브레이킹 스크립트</h3>
+                <div style="background:#f8fafc; border-radius:8px; padding:16px; margin-top:8px; font-size:13px; line-height:2; color:#475569;">
+                    <p><strong>[도착 직후]</strong></p>
+                    <p>"안녕하세요, OOO님! 잘 찾아왔네요. (웃음) 오늘 날씨 진짜 좋네요/춥네요."</p>
+                    <p style="margin-top:8px;"><strong>[공통 관심사 탐색]</strong></p>
+                    <p>"아이가 있으신 거 맞죠? 몇 살이에요? 요즘 애들 키우는 게 보통 일이 아니잖아요."</p>
+                    <p style="margin-top:8px;"><strong>[분위기 전환]</strong></p>
+                    <p>"OOO님, 오늘 시간 내주셔서 감사해요. 30분~1시간 정도 얘기 나눠보려고 하는데요. <strong>가입 압박 같은 거 전혀 없으니까</strong> 편하게 말씀해주세요."</p>
+                </div>
+                <div class="notice notice-success" style="margin-top:12px;">
+                    ✅ <strong>포인트:</strong> 칭찬하기 / 공통 관심사 찾기 / 자기소개 + 명함전달 / 상담과정 미리 안내
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🔍 팩트파인딩 (FF) 질문 리스트</h3>
+
+                <h4 style="margin-top:12px; font-size:13px; font-weight:600; color:#3b82f6;">보험 현황 파악</h4>
+                <ol style="margin-top:8px;">
+                    <li>"현재 가입하신 보험이 몇 개 정도 되세요?"</li>
+                    <li>"매달 보험료가 대략 얼마나 나가세요?"</li>
+                    <li>"어느 회사 어떤 보험인지 아세요?"</li>
+                    <li>"보험증권이나 가입 서류 가지고 계세요?"</li>
+                    <li>"보험금 청구해보신 적 있으세요?"</li>
+                </ol>
+
+                <h4 style="margin-top:16px; font-size:13px; font-weight:600; color:#16a34a;">건강 상태 파악</h4>
+                <ol start="6" style="margin-top:8px;">
+                    <li>"지금 건강 상태는 어떠세요? 특별히 안 좋은 데 있으신가요?"</li>
+                    <li>"가족 중에 큰 병 앓으신 분 계세요?" (가족력)</li>
+                    <li>"최근 3년 내에 병원에서 치료받으신 적 있으세요?"</li>
+                </ol>
+
+                <h4 style="margin-top:16px; font-size:13px; font-weight:600; color:#ea580c;">재무/가족 파악</h4>
+                <ol start="9" style="margin-top:8px;">
+                    <li>"직업이 어떻게 되세요? 직장인/자영업?"</li>
+                    <li>"대략 연간 소득이 어느 정도 되세요?"</li>
+                    <li>"대출이나 부채가 있으세요?"</li>
+                    <li>"가족 구성이 어떻게 되세요?"</li>
+                    <li>"배우자/아이들 보험은 어떻게 되어 있어요?"</li>
+                </ol>
+
+                <h4 style="margin-top:16px; font-size:13px; font-weight:600; color:#9333ea;">니즈 방향 파악</h4>
+                <ol start="14" style="margin-top:8px;">
+                    <li>"보험에서 가장 걱정되시는 부분이 뭐예요?"</li>
+                    <li>"오늘 제일 확인하고 싶으셨던 게 뭔가요?"</li>
+                    <li>"이상적으로 어떤 보장이 있으면 좋겠다고 생각하세요?"</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>🔥 니즈환기 화법 3가지</h3>
+
+                <h4 style="margin-top:12px; font-size:14px; font-weight:600; color:#dc2626;">1. 의료비 니즈환기</h4>
+                <div style="background:#fef2f2; border-radius:8px; padding:14px; margin:8px 0 16px; font-size:13px; color:#475569; line-height:1.9;">
+                    "혹시 OOO님, 주변에 암 걸리신 분 있으세요? 요즘 암 치료 <strong>2~3천만원은 기본</strong>이고, 입원·수술하면 6개월~1년 계속 나가거든요. 근데 더 문제는 <strong>그 기간 동안 일을 못 한다</strong>는 거예요. 소득이 끊기는 거잖아요."
+                </div>
+
+                <h4 style="font-size:14px; font-weight:600; color:#ea580c;">2. 소득 보장 니즈환기</h4>
+                <div style="background:#fff7ed; border-radius:8px; padding:14px; margin:8px 0 16px; font-size:13px; color:#475569; line-height:1.9;">
+                    "만약에 OOO님이 지금 사고가 나서 <strong>3개월 동안 일을 못 하게 되면</strong>, 가정에서 어떻게 될 것 같아요? 매달 나가는 대출이자, 교육비, 생활비... 다 나가는데 수입은 없는 거거든요."
+                </div>
+
+                <h4 style="font-size:14px; font-weight:600; color:#3b82f6;">3. 노후 니즈환기</h4>
+                <div style="background:#eff6ff; border-radius:8px; padding:14px; margin:8px 0; font-size:13px; color:#475569; line-height:1.9;">
+                    "OOO님, 지금 부모님 나이가 어떻게 되세요? 부모님 노후 준비가 잘 되어 있어요? 만약 우리가 지금 준비 안 하면, <strong>나중에 우리 아이들한테 똑같은 짐</strong>을 지우는 거잖아요."
+                </div>
+            </div>
+        </div>
+
+        <!-- AP 자료 -->
+        <div class="section" id="section-sales-ap-material">
+            <h2 class="section-title">AP 자료</h2>
+            <p class="section-desc">초회상담 시 활용하는 자료와 고객 유형별 접근법입니다.</p>
+
+            <div class="card">
+                <h3>📄 핵심 활용 자료 4가지</h3>
+                <div class="table-wrap" style="margin-top:12px;">
+                    <table>
+                        <thead><tr><th>자료</th><th>용도</th><th>설명 화법</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>보장분석표</strong></td>
+                                <td>현재 보험 현황 정리, 공백 시각화</td>
+                                <td>"이 빨간 부분이 지금 보장이 없는 영역이에요."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>보험료 비교표</strong></td>
+                                <td>같은 보장 기준 회사별 비교</td>
+                                <td>"동일 보장인데 이 회사는 월 X만원, 이 회사는 Y만원이에요."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>통계 자료</strong></td>
+                                <td>설득력 강화용 데이터</td>
+                                <td>"숫자 하나만 보여드릴게요..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>라이프사이클표</strong></td>
+                                <td>생애 주기별 리스크 안내</td>
+                                <td>"지금 OOO님 나이에서는 이 부분이 가장 중요한 시기예요."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📊 상담에 쓰는 핵심 통계</h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px;">
+                    <div style="background:#fef2f2; border-radius:8px; padding:16px; text-align:center;">
+                        <div style="font-size:28px; font-weight:700; color:#dc2626;">3명 중 1명</div>
+                        <div style="font-size:12px; color:#64748b; margin-top:4px;">평생 암 경험 (국립암센터)</div>
+                    </div>
+                    <div style="background:#fff7ed; border-radius:8px; padding:16px; text-align:center;">
+                        <div style="font-size:28px; font-weight:700; color:#ea580c;">3,500만+</div>
+                        <div style="font-size:12px; color:#64748b; margin-top:4px;">암 치료 평균 비용</div>
+                    </div>
+                    <div style="background:#eff6ff; border-radius:8px; padding:16px; text-align:center;">
+                        <div style="font-size:28px; font-weight:700; color:#3b82f6;">9.5일</div>
+                        <div style="font-size:12px; color:#64748b; margin-top:4px;">평균 입원 기간</div>
+                    </div>
+                    <div style="background:#f0fdf4; border-radius:8px; padding:16px; text-align:center;">
+                        <div style="font-size:28px; font-weight:700; color:#16a34a;">월 270만</div>
+                        <div style="font-size:12px; color:#64748b; margin-top:4px;">은퇴 후 필요 생활비 (통계청)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>👥 고객 유형별 접근법</h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px;">
+                    <div style="background:#eff6ff; border-radius:8px; padding:16px;">
+                        <div style="font-weight:600; font-size:14px; color:#1e40af; margin-bottom:8px;">📐 분석형 고객</div>
+                        <ul style="font-size:12px; color:#64748b; line-height:1.8;">
+                            <li>비교표, 통계 적극 활용</li>
+                            <li>"데이터로 보시면..." 화법</li>
+                            <li>충분한 검토 시간 제공</li>
+                            <li>결론 강요 금지</li>
+                        </ul>
+                    </div>
+                    <div style="background:#faf5ff; border-radius:8px; padding:16px;">
+                        <div style="font-weight:600; font-size:14px; color:#9333ea; margin-bottom:8px;">💜 감성형 고객</div>
+                        <ul style="font-size:12px; color:#64748b; line-height:1.8;">
+                            <li>가족 이야기, 사례 활용</li>
+                            <li>"만약에 이런 상황이..." 시나리오</li>
+                            <li>감정 공감 화법 우선</li>
+                            <li>숫자보다 스토리로</li>
+                        </ul>
+                    </div>
+                    <div style="background:#fff7ed; border-radius:8px; padding:16px;">
+                        <div style="font-weight:600; font-size:14px; color:#ea580c; margin-bottom:8px;">⚡ 결단형 고객</div>
+                        <ul style="font-size:12px; color:#64748b; line-height:1.8;">
+                            <li>핵심만 간결하게 제시</li>
+                            <li>선택지를 2가지로 압축</li>
+                            <li>양자택일 클로징 빠르게</li>
+                            <li>한 장 요약 자료</li>
+                        </ul>
+                    </div>
+                    <div style="background:#f0fdf4; border-radius:8px; padding:16px;">
+                        <div style="font-weight:600; font-size:14px; color:#16a34a; margin-bottom:8px;">🔍 의심형 고객</div>
+                        <ul style="font-size:12px; color:#64748b; line-height:1.8;">
+                            <li>판매 의도 최소화</li>
+                            <li>"팔려는 게 아니고요..." 전제</li>
+                            <li>금감원, 통계청 등 공신력 자료</li>
+                            <li>"참고만 해보세요" 화법</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 클로징 -->
+        <div class="section" id="section-sales-closing">
+            <h2 class="section-title">클로징</h2>
+            <p class="section-desc">계약 체결을 위한 클로징 기법, 타이밍, 결정장애 대처법입니다.</p>
+
+            <div class="card">
+                <h3>🎯 클로징 타이밍 시그널</h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px;">
+                    <div style="background:#f0fdf4; border-radius:8px; padding:16px;">
+                        <div style="font-weight:600; font-size:13px; color:#16a34a; margin-bottom:8px;">💬 언어적 시그널</div>
+                        <ul style="font-size:12px; color:#64748b; line-height:1.8;">
+                            <li>"이거 얼마예요?"</li>
+                            <li>"가입하면 언제부터 적용돼요?"</li>
+                            <li>"배우자도 되나요?"</li>
+                            <li>"다른 사람도 많이 해요?"</li>
+                            <li>"특약 빼면 얼마예요?"</li>
+                        </ul>
+                    </div>
+                    <div style="background:#eff6ff; border-radius:8px; padding:16px;">
+                        <div style="font-weight:600; font-size:13px; color:#1e40af; margin-bottom:8px;">👀 비언어적 시그널</div>
+                        <ul style="font-size:12px; color:#64748b; line-height:1.8;">
+                            <li>설계서를 가까이 당겨서 봄</li>
+                            <li>고개를 끄덕임</li>
+                            <li>계산기/폰을 꺼냄</li>
+                            <li>몸이 앞으로 기울어짐</li>
+                            <li>질문이 구체적으로 바뀜</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🔥 클로징 6가지 기법</h3>
+
+                <h4 style="margin-top:12px; font-size:14px; font-weight:600; color:#3b82f6;">1. 시범 클로징 (Trial Close)</h4>
+                <p style="font-size:12px; color:#94a3b8; margin-bottom:8px;">본 클로징 전 반응 테스트</p>
+                <div style="background:#f8fafc; border-radius:8px; padding:12px; font-size:13px; color:#475569; line-height:1.9;">
+                    "설명드린 내용 중에서 가장 마음에 드셨던 부분이 어떤 거예요?"<br>
+                    "이 정도 보험료라면 크게 부담스럽지 않으실 것 같은데, 어때요?"
+                </div>
+
+                <h4 style="margin-top:20px; font-size:14px; font-weight:600; color:#ea580c;">2. 양자택일 클로징 (Alternative Close)</h4>
+                <p style="font-size:12px; color:#94a3b8; margin-bottom:8px;">선택지 2가지로 좁히기, 둘 다 긍정적 결과</p>
+                <div style="background:#f8fafc; border-radius:8px; padding:12px; font-size:13px; color:#475569; line-height:1.9;">
+                    "A플랜이랑 B플랜 중 어느 쪽이 더 맞으실 것 같아요?"<br>
+                    "납입기간을 20년으로 하시겠어요, 30년으로 하시겠어요?"<br>
+                    "이달에 시작하시겠어요, 다음달에 시작하시겠어요?"
+                </div>
+
+                <h4 style="margin-top:20px; font-size:14px; font-weight:600; color:#9333ea;">3. 추정 클로징 (Assumptive Close)</h4>
+                <p style="font-size:12px; color:#94a3b8; margin-bottom:8px;">이미 결정한 것처럼 자연스럽게 진행</p>
+                <div style="background:#f8fafc; border-radius:8px; padding:12px; font-size:13px; color:#475569; line-height:1.9;">
+                    "그럼 OOO님 생년월일이 어떻게 되세요?"<br>
+                    "납입 계좌는 주로 어디 쓰세요?"<br>
+                    "보험 시작일을 이번 달 O일로 할까요?"
+                </div>
+
+                <h4 style="margin-top:20px; font-size:14px; font-weight:600; color:#16a34a;">4. 요약 클로징 (Summary Close)</h4>
+                <p style="font-size:12px; color:#94a3b8; margin-bottom:8px;">장점 요약 후 결정 유도</p>
+                <div style="background:#f8fafc; border-radius:8px; padding:12px; font-size:13px; color:#475569; line-height:1.9;">
+                    "오늘 말씀 나눠보니까요, OOO님한테 딱 필요한 게 이 세 가지더라고요. <strong>첫째 암진단금, 둘째 실손의료비, 셋째 수술비.</strong> 이 세 가지가 월 O만원에 다 들어가거든요. 지금 시작하시는 게 맞겠죠?"
+                </div>
+
+                <h4 style="margin-top:20px; font-size:14px; font-weight:600; color:#dc2626;">5. 긴급 클로징 (Urgency Close)</h4>
+                <p style="font-size:12px; color:#94a3b8; margin-bottom:8px;">지금 해야 하는 이유 제시</p>
+                <div style="background:#f8fafc; border-radius:8px; padding:12px; font-size:13px; color:#475569; line-height:1.9;">
+                    "지금 건강하실 때 가입이 가능한 거라서요. 나중에 뭔가 생기면 이 조건으로는 안 되거든요."<br>
+                    "이번 달에 OO보험사 상품 개정이 있어서, 이번 달 안에 하시면 현재 기준으로 가입하실 수 있어요."
+                </div>
+
+                <h4 style="margin-top:20px; font-size:14px; font-weight:600; color:#64748b;">6. 침묵 클로징 (Silence Close)</h4>
+                <p style="font-size:12px; color:#94a3b8; margin-bottom:8px;">마지막 제안 후 침묵 — 먼저 말하는 사람이 지는 게임</p>
+                <div style="background:#f8fafc; border-radius:8px; padding:12px; font-size:13px; color:#475569; line-height:1.9;">
+                    "이 조건으로 오늘 시작하시면 어떨까요?" <strong>(이후 침묵 유지!)</strong>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>😰 결정장애 고객 대처법</h3>
+
+                <h4 style="margin-top:12px; font-size:13px; font-weight:600; color:#ea580c;">배우자 상의가 필요한 경우</h4>
+                <div style="background:#fff7ed; border-radius:8px; padding:12px; margin:8px 0 16px; font-size:13px; color:#475569; line-height:1.9;">
+                    "물론이죠. 근데 제가 <strong>남편/아내분께도 같이 설명</strong>드리면 어떨까요? 직접 설명드리면 더 이해가 빠르실 거예요. 다음에 시간 언제가 좋으세요?"
+                </div>
+
+                <h4 style="font-size:13px; font-weight:600; color:#ea580c;">계속 "생각해볼게요" 하는 경우</h4>
+                <div style="background:#fff7ed; border-radius:8px; padding:12px; margin:8px 0 16px; font-size:13px; color:#475569; line-height:1.9;">
+                    "오늘 말씀 드린 내용 중에서 아직 이해가 안 되시는 부분이 있으신 건가요, 아니면 다른 이유가 있으신 건가요?"<br>
+                    <span style="color:#94a3b8;">→ 진짜 이유 파악 후 해당 부분만 집중 재설명</span>
+                </div>
+
+                <h4 style="font-size:13px; font-weight:600; color:#ea580c;">가격이 부담스러운 경우</h4>
+                <div style="background:#fff7ed; border-radius:8px; padding:12px; margin:8px 0 16px; font-size:13px; color:#475569; line-height:1.9;">
+                    "꼭 필요한 것만 남기고 나머지는 나중에 추가하는 방식으로 <strong>최소한으로 시작</strong>해볼 수도 있거든요. 월 O만원으로 줄이면 어떠세요?"
+                </div>
+
+                <h4 style="font-size:13px; font-weight:600; color:#ea580c;">클로징 실패 시 다음 약속</h4>
+                <div style="background:#fff7ed; border-radius:8px; padding:12px; margin:8px 0; font-size:13px; color:#475569; line-height:1.9;">
+                    "오늘 시간 내주셔서 감사해요. 설계서 한번 검토해보시고요, <strong>O일에 제가 연락드릴게요.</strong> 그때 한번 더 얘기 나눠봐요."
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>✅ 계약 완결 후 스크립트</h3>
+                <div style="background:#f0fdf4; border-radius:8px; padding:16px; margin-top:8px; font-size:13px; line-height:2; color:#475569;">
+                    <p>"OOO님, 오늘 좋은 결정 하셨어요. 제가 계속 담당해드릴게요."</p>
+                    <p>"앞으로 보험 관련이나 청구 도움 필요하시면 <strong>저한테 바로 연락</strong>주시면 됩니다."</p>
+                    <p>"혹시 주변에 보험 점검이 필요한 분 계시면 저 소개시켜 주세요. 똑같이 성심껏 해드릴게요. 😊"</p>
+                </div>
+            </div>
+
+            <div class="card" style="text-align:center; background:linear-gradient(135deg, #1a1f36 0%, #2d3561 100%); color:#fff; border:none;">
+                <p style="font-size:16px; line-height:2; color:rgba(255,255,255,0.8);">
+                    "사람들은 팔려고 하는 사람을 싫어하는 것이 아니다.<br>
+                    단지 <strong style="color:#7ba0ff;">팔려고만 하는 사람</strong>을 싫어하는 것이다."
+                </p>
+            </div>
+        </div>
+
         <!-- ==================== 업무 가이드 ==================== -->
         <div class="section" id="section-work-apply">
             <h2 class="section-title">청약 절차</h2>
@@ -1772,6 +2383,12 @@
         'ins-general': '보험 컨텐츠 > 손해보험',
         'ins-comparison': '보험 컨텐츠 > 상품 비교',
         'ins-case': '보험 컨텐츠 > 사례 모음',
+        'sales-db': '영업 > DB영업',
+        'sales-ta': '영업 > TA 스크립트',
+        'sales-reject': '영업 > 거절처리 화법',
+        'sales-ap-script': '영업 > AP 스크립트',
+        'sales-ap-material': '영업 > AP 자료',
+        'sales-closing': '영업 > 클로징',
         'work-apply': '업무 가이드 > 청약 절차',
         'work-underwriting': '업무 가이드 > 언더라이팅',
         'work-claim': '업무 가이드 > 보험금 청구',
