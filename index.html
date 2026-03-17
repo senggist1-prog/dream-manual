@@ -5,524 +5,127 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>드림금융컨설팅 업무메뉴얼</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-            background: #f5f7fa;
-            color: #333;
-            line-height: 1.7;
-        }
-
-        /* 사이드바 */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 280px;
-            height: 100vh;
-            background: #1a1f36;
-            color: #fff;
-            overflow-y: auto;
-            z-index: 100;
-            transition: transform 0.3s ease;
-        }
-
-        .sidebar-header {
-            padding: 28px 24px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .sidebar-header h1 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: -0.5px;
-        }
-
-        .sidebar-header p {
-            font-size: 12px;
-            color: rgba(255,255,255,0.5);
-            margin-top: 4px;
-        }
-
-        .sidebar-nav {
-            padding: 16px 0;
-        }
-
-        .nav-category {
-            padding: 0 16px;
-            margin-bottom: 4px;
-        }
-
-        .nav-category-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 12px;
-            font-size: 14px;
-            font-weight: 600;
-            color: rgba(255,255,255,0.9);
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background 0.2s;
-            user-select: none;
-        }
-
-        .nav-category-title:hover {
-            background: rgba(255,255,255,0.08);
-        }
-
-        .nav-category-title.active {
-            background: rgba(79, 120, 255, 0.2);
-            color: #7ba0ff;
-        }
-
-        .nav-category-icon {
-            width: 20px;
-            text-align: center;
-            font-size: 16px;
-        }
-
-        .nav-category-arrow {
-            margin-left: auto;
-            font-size: 10px;
-            transition: transform 0.2s;
-            color: rgba(255,255,255,0.4);
-        }
-
-        .nav-category-title.open .nav-category-arrow {
-            transform: rotate(90deg);
-        }
-
-        .nav-sub-list {
-            display: none;
-            padding: 2px 0 8px 42px;
-        }
-
-        .nav-sub-list.open {
-            display: block;
-        }
-
-        .nav-sub-item {
-            padding: 6px 12px;
-            font-size: 13px;
-            color: rgba(255,255,255,0.55);
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
-
-        .nav-sub-item:hover {
-            color: rgba(255,255,255,0.9);
-            background: rgba(255,255,255,0.05);
-        }
-
-        .nav-sub-item.active {
-            color: #7ba0ff;
-            background: rgba(79, 120, 255, 0.1);
-        }
-
-        /* 메인 컨텐츠 */
-        .main {
-            margin-left: 280px;
-            min-height: 100vh;
-        }
-
-        .top-bar {
-            position: sticky;
-            top: 0;
-            background: rgba(245, 247, 250, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 16px 40px;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 50;
-        }
-
-        .breadcrumb {
-            font-size: 13px;
-            color: #94a3b8;
-        }
-
-        .breadcrumb span {
-            color: #334155;
-            font-weight: 600;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 8px 14px;
-            width: 280px;
-        }
-
-        .search-box input {
-            border: none;
-            outline: none;
-            font-size: 13px;
-            width: 100%;
-            color: #333;
-        }
-
-        .search-icon {
-            color: #94a3b8;
-            font-size: 14px;
-        }
-
-        .content {
-            padding: 40px;
-            max-width: 900px;
-        }
-
-        /* 섹션 */
-        .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        .section-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #1a1f36;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        .section-desc {
-            font-size: 15px;
-            color: #64748b;
-            margin-bottom: 36px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        /* 카드 */
-        .card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 28px;
-            margin-bottom: 20px;
-            border: 1px solid #e8ecf1;
-            transition: box-shadow 0.2s;
-        }
-
-        .card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-        }
-
-        .card h3 {
-            font-size: 17px;
-            font-weight: 600;
-            color: #1a1f36;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .card p, .card li {
-            font-size: 14px;
-            color: #475569;
-            line-height: 1.8;
-        }
-
-        .card ul, .card ol {
-            padding-left: 20px;
-            margin-top: 8px;
-        }
-
-        .card li {
-            margin-bottom: 6px;
-        }
-
-        /* 태그/뱃지 */
-        .badge {
-            display: inline-block;
-            padding: 3px 10px;
-            font-size: 11px;
-            font-weight: 600;
-            border-radius: 20px;
-            letter-spacing: 0.3px;
-        }
-
-        .badge-blue { background: #eff6ff; color: #3b82f6; }
-        .badge-green { background: #f0fdf4; color: #16a34a; }
-        .badge-orange { background: #fff7ed; color: #ea580c; }
-        .badge-purple { background: #faf5ff; color: #9333ea; }
-        .badge-red { background: #fef2f2; color: #dc2626; }
-
-        /* 테이블 */
-        .table-wrap {
-            overflow-x: auto;
-            margin-top: 12px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
-
-        th {
-            background: #f8fafc;
-            padding: 10px 14px;
-            text-align: left;
-            font-weight: 600;
-            color: #475569;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        td {
-            padding: 10px 14px;
-            border-bottom: 1px solid #f1f5f9;
-            color: #475569;
-        }
-
-        tr:hover td {
-            background: #fafbfd;
-        }
-
-        /* 알림 박스 */
-        .notice {
-            padding: 16px 20px;
-            border-radius: 10px;
-            margin: 16px 0;
-            font-size: 13px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .notice-info {
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            color: #1e40af;
-        }
-
-        .notice-warning {
-            background: #fffbeb;
-            border: 1px solid #fde68a;
-            color: #92400e;
-        }
-
-        .notice-success {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            color: #166534;
-        }
-
-        /* 체크리스트 */
-        .checklist {
-            list-style: none;
-            padding: 0;
-        }
-
-        .checklist li {
-            padding: 8px 0;
-            padding-left: 28px;
-            position: relative;
-        }
-
-        .checklist li::before {
-            content: '☐';
-            position: absolute;
-            left: 0;
-            color: #94a3b8;
-        }
-
-        /* 홈 대시보드 */
-        .home-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 16px;
-            margin-top: 20px;
-        }
-
-        .home-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 24px;
-            border: 1px solid #e8ecf1;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .home-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-            border-color: #c7d2fe;
-        }
-
-        .home-card-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            margin-bottom: 14px;
-        }
-
-        .home-card h3 {
-            font-size: 16px;
-            font-weight: 600;
-            color: #1a1f36;
-            margin-bottom: 6px;
-        }
-
-        .home-card p {
-            font-size: 13px;
-            color: #94a3b8;
-            line-height: 1.5;
-        }
-
-        .icon-blue { background: #eff6ff; }
-        .icon-green { background: #f0fdf4; }
-        .icon-orange { background: #fff7ed; }
-        .icon-purple { background: #faf5ff; }
-        .icon-red { background: #fef2f2; }
-
-        /* 준비중 표시 */
-        .coming-soon {
-            text-align: center;
-            padding: 60px 20px;
-            color: #94a3b8;
-        }
-
-        .coming-soon-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-
-        .coming-soon h3 {
-            font-size: 18px;
-            color: #64748b;
-            margin-bottom: 8px;
-        }
-
-        .coming-soon p {
-            font-size: 14px;
-        }
-
-        /* 모바일 햄버거 */
-        .mobile-toggle {
-            display: none;
-            position: fixed;
-            top: 14px;
-            left: 14px;
-            z-index: 200;
-            background: #1a1f36;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        /* 모바일 반응형 */
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .main {
-                margin-left: 0;
-            }
-
-            .mobile-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .top-bar {
-                padding: 16px 20px;
-                padding-left: 60px;
-            }
-
-            .content {
-                padding: 24px 20px;
-            }
-
-            .search-box {
-                width: 180px;
-            }
-
-            .home-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* 스크롤바 */
-        .sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .sidebar::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .sidebar::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.15);
-            border-radius: 4px;
-        }
-
-        /* 인쇄 */
-        @media print {
-            .sidebar, .top-bar, .mobile-toggle { display: none; }
-            .main { margin-left: 0; }
-            .section { display: block !important; page-break-before: always; }
-            .section:first-child { page-break-before: avoid; }
-        }
+        :root {
+            --bg:#f7f8fb; --card:#ffffff; --text:#1f2937; --sub:#6b7280;
+            --line:#e5e7eb; --point:#2563eb; --point-soft:#eff6ff;
+            --radius:16px; --shadow:0 8px 24px rgba(15,23,42,0.06);
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+        .sidebar{position:fixed;top:0;left:0;width:280px;height:100vh;background:#1a1f36;color:#fff;overflow-y:auto;z-index:100;transition:transform .3s ease}
+        .sidebar-header{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+        .sidebar-header h1{font-size:18px;font-weight:700;color:#fff;letter-spacing:-.5px}
+        .sidebar-header p{font-size:12px;color:rgba(255,255,255,.5);margin-top:4px}
+        .sidebar-nav{padding:16px 0}
+        .nav-category{padding:0 16px;margin-bottom:4px}
+        .nav-category-title{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:14px;font-weight:600;color:rgba(255,255,255,.9);cursor:pointer;border-radius:8px;transition:background .2s;user-select:none}
+        .nav-category-title:hover{background:rgba(255,255,255,.08)}
+        .nav-category-title.active{background:rgba(79,120,255,.2);color:#7ba0ff}
+        .nav-category-icon{width:20px;text-align:center;font-size:16px}
+        .nav-category-arrow{margin-left:auto;font-size:10px;transition:transform .2s;color:rgba(255,255,255,.4)}
+        .nav-category-title.open .nav-category-arrow{transform:rotate(90deg)}
+        .nav-sub-list{display:none;padding:2px 0 8px 42px}
+        .nav-sub-list.open{display:block}
+        .nav-sub-item{padding:6px 12px;font-size:13px;color:rgba(255,255,255,.55);cursor:pointer;border-radius:6px;transition:all .2s}
+        .nav-sub-item:hover{color:rgba(255,255,255,.9);background:rgba(255,255,255,.05)}
+        .nav-sub-item.active{color:#7ba0ff;background:rgba(79,120,255,.1)}
+        .main{margin-left:280px;min-height:100vh}
+        .top-bar{position:sticky;top:0;background:rgba(247,248,251,.95);backdrop-filter:blur(10px);padding:16px 40px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;z-index:50}
+        .breadcrumb{font-size:13px;color:#94a3b8}
+        .breadcrumb span{color:#334155;font-weight:600}
+        .search-box{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 14px;width:280px}
+        .search-box input{border:none;outline:none;font-size:13px;width:100%;color:var(--text)}
+        .search-icon{color:#94a3b8;font-size:14px}
+        .content{padding:40px;max-width:900px}
+        .section{display:none}
+        .section.active{display:block}
+        .section-title{font-size:28px;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:-.5px}
+        .section-desc{font-size:15px;color:var(--sub);margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+        .hero{background:linear-gradient(135deg,#fff,#f3f7ff);border:1px solid var(--line);border-radius:24px;padding:40px 36px;box-shadow:var(--shadow);margin-bottom:28px}
+        .hero h2{margin:0 0 10px;font-size:30px;font-weight:700;letter-spacing:-.5px}
+        .hero p{margin:0;color:var(--sub);font-size:15px;line-height:1.6}
+        .hero-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+        .hero-badges span{background:var(--point-soft);color:var(--point);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600}
+        .card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:20px;border:1px solid var(--line);box-shadow:var(--shadow);transition:box-shadow .2s}
+        .card:hover{box-shadow:0 12px 32px rgba(15,23,42,.08)}
+        .card h3{font-size:17px;font-weight:600;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+        .card p,.card li{font-size:14px;color:#475569;line-height:1.8}
+        .card ul,.card ol{padding-left:20px;margin-top:8px}
+        .card li{margin-bottom:6px}
+        .badge{display:inline-block;padding:3px 10px;font-size:11px;font-weight:600;border-radius:20px;letter-spacing:.3px}
+        .badge-blue{background:#eff6ff;color:#3b82f6}
+        .badge-green{background:#f0fdf4;color:#16a34a}
+        .badge-orange{background:#fff7ed;color:#ea580c}
+        .badge-purple{background:#faf5ff;color:#9333ea}
+        .badge-red{background:#fef2f2;color:#dc2626}
+        .table-wrap{overflow-x:auto;margin-top:12px}
+        table{width:100%;border-collapse:collapse;font-size:13px}
+        th{background:#f8fafc;padding:10px 14px;text-align:left;font-weight:600;color:#475569;border-bottom:2px solid var(--line)}
+        td{padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#475569}
+        tr:hover td{background:#fafbfd}
+        .notice{padding:16px 20px;border-radius:10px;margin:16px 0;font-size:13px;display:flex;align-items:flex-start;gap:10px}
+        .notice-info{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af}
+        .notice-warning{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+        .notice-success{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
+        .summary-box{background:var(--point-soft);border:1px solid #bfdbfe;border-radius:var(--radius);padding:24px 28px;margin-bottom:20px}
+        .summary-box h3{font-size:16px;font-weight:700;color:var(--point);margin-bottom:12px}
+        .summary-box ul{padding-left:20px;margin:0}
+        .summary-box li{font-size:14px;color:#1e40af;line-height:1.8;margin-bottom:4px}
+        .mistake-box{background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);padding:24px 28px;margin-bottom:20px}
+        .mistake-box h3{font-size:16px;font-weight:700;color:#dc2626;margin-bottom:12px}
+        .mistake-box ul{padding-left:20px;margin:0}
+        .mistake-box li{font-size:14px;color:#991b1b;line-height:1.8;margin-bottom:4px}
+        .check-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--radius);padding:24px 28px;margin-bottom:20px}
+        .check-box h3{font-size:16px;font-weight:700;color:#16a34a;margin-bottom:12px}
+        .check-box label{display:block;margin:8px 0;font-size:14px;color:#166534;cursor:pointer}
+        .check-box label input[type="checkbox"]{margin-right:8px}
+        .checklist{list-style:none;padding:0}
+        .checklist li{padding:8px 0;padding-left:28px;position:relative}
+        .checklist li::before{content:"☐";position:absolute;left:0;color:#94a3b8}
+        .home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:20px}
+        .home-card{background:var(--card);border-radius:var(--radius);padding:24px;border:1px solid var(--line);cursor:pointer;transition:all .2s;box-shadow:var(--shadow)}
+        .home-card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.08);border-color:#c7d2fe}
+        .home-card-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+        .home-card h3{font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px}
+        .home-card p{font-size:13px;color:#94a3b8;line-height:1.5}
+        .icon-blue{background:#eff6ff}.icon-green{background:#f0fdf4}.icon-orange{background:#fff7ed}.icon-purple{background:#faf5ff}.icon-red{background:#fef2f2}.icon-gray{background:#f3f4f6}
+        .coming-soon{text-align:center;padding:60px 20px;color:#94a3b8}
+        .coming-soon-icon{font-size:48px;margin-bottom:16px}
+        .coming-soon h3{font-size:18px;color:var(--sub);margin-bottom:8px}
+        .coming-soon p{font-size:14px}
+        .page-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;margin-bottom:24px}
+        .page-meta span{background:#f9fafb;border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:12px;color:var(--sub)}
+        .process-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:16px 0;font-size:12px}
+        .process-step{background:var(--point-soft);padding:6px 14px;border-radius:20px;color:var(--point);font-weight:600}
+        .process-arrow{color:#cbd5e1}
+        .rule-list{list-style:none;padding:0}
+        .rule-list li{padding:10px 0;padding-left:28px;position:relative;font-size:14px;color:#475569;border-bottom:1px solid #f1f5f9}
+        .rule-list li.forbidden::before{content:"🚫";position:absolute;left:0}
+        .rule-list li.required::before{content:"✅";position:absolute;left:0}
+        .mobile-toggle{display:none;position:fixed;top:14px;left:14px;z-index:200;background:#1a1f36;color:#fff;border:none;border-radius:8px;width:40px;height:40px;font-size:20px;cursor:pointer}
+        @media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.mobile-toggle{display:flex;align-items:center;justify-content:center}.top-bar{padding:16px 20px;padding-left:60px}.content{padding:24px 20px}.search-box{width:180px}.home-grid{grid-template-columns:1fr}.hero{padding:28px 20px}.hero h2{font-size:24px}}
+        .sidebar::-webkit-scrollbar{width:4px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:4px}
+        @media print{.sidebar,.top-bar,.mobile-toggle{display:none}.main{margin-left:0}.section{display:block!important;page-break-before:always}.section:first-child{page-break-before:avoid}}
+        .ext-link{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--point-soft);color:var(--point);border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;margin:4px 4px 4px 0;transition:background .2s}
+        .ext-link:hover{background:#dbeafe}
     </style>
 </head>
 <body>
-
-<!-- 모바일 메뉴 버튼 -->
 <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
-
-<!-- 사이드바 -->
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
         <h1>드림금융컨설팅</h1>
-        <p>업무메뉴얼 v1.0</p>
+        <p>업무메뉴얼 v2.0</p>
     </div>
     <nav class="sidebar-nav">
-        <!-- 홈 -->
         <div class="nav-category">
             <div class="nav-category-title active" onclick="showSection('home')">
-                <span class="nav-category-icon">🏠</span>
-                홈
+                <span class="nav-category-icon">🏠</span> 홈
             </div>
         </div>
-
-        <!-- 1. 입사 안내 -->
         <div class="nav-category">
             <div class="nav-category-title" onclick="toggleCategory(this)">
-                <span class="nav-category-icon">📋</span>
-                입사 안내
-                <span class="nav-category-arrow">▶</span>
+                <span class="nav-category-icon">📋</span> 입사 안내 <span class="nav-category-arrow">▶</span>
             </div>
             <div class="nav-sub-list">
                 <div class="nav-sub-item" onclick="showSection('join-process')">입사 절차</div>
@@ -531,28 +134,21 @@
                 <div class="nav-sub-item" onclick="showSection('join-systems')">시스템 세팅</div>
             </div>
         </div>
-
-        <!-- 2. 교육 -->
         <div class="nav-category">
             <div class="nav-category-title" onclick="toggleCategory(this)">
-                <span class="nav-category-icon">📚</span>
-                교육
-                <span class="nav-category-arrow">▶</span>
+                <span class="nav-category-icon">📚</span> 교육 프로그램 <span class="nav-category-arrow">▶</span>
             </div>
             <div class="nav-sub-list">
-                <div class="nav-sub-item" onclick="showSection('edu-new')">신인 교육</div>
+                <div class="nav-sub-item" onclick="showSection('edu-new')">신입 교육</div>
+                <div class="nav-sub-item" onclick="showSection('edu-basic')">보험 기초</div>
                 <div class="nav-sub-item" onclick="showSection('edu-product')">상품 교육</div>
                 <div class="nav-sub-item" onclick="showSection('edu-sales')">영업 교육</div>
-                <div class="nav-sub-item" onclick="showSection('edu-license')">자격증 안내</div>
+                <div class="nav-sub-item" onclick="showSection('edu-license')">자격/필수교육 안내</div>
             </div>
         </div>
-
-        <!-- 3. 보상체계 -->
         <div class="nav-category">
             <div class="nav-category-title" onclick="toggleCategory(this)">
-                <span class="nav-category-icon">💰</span>
-                보상체계
-                <span class="nav-category-arrow">▶</span>
+                <span class="nav-category-icon">💰</span> 보상체계 <span class="nav-category-arrow">▶</span>
             </div>
             <div class="nav-sub-list">
                 <div class="nav-sub-item" onclick="showSection('reward-commission')">수수료 체계</div>
@@ -561,28 +157,20 @@
                 <div class="nav-sub-item" onclick="showSection('reward-benefit')">복리후생</div>
             </div>
         </div>
-
-        <!-- 4. 보험 컨텐츠 -->
         <div class="nav-category">
             <div class="nav-category-title" onclick="toggleCategory(this)">
-                <span class="nav-category-icon">🛡️</span>
-                보험 컨텐츠
-                <span class="nav-category-arrow">▶</span>
+                <span class="nav-category-icon">🛡️</span> 보험 콘텐츠 <span class="nav-category-arrow">▶</span>
             </div>
             <div class="nav-sub-list">
                 <div class="nav-sub-item" onclick="showSection('ins-life')">생명보험</div>
                 <div class="nav-sub-item" onclick="showSection('ins-general')">손해보험</div>
-                <div class="nav-sub-item" onclick="showSection('ins-comparison')">상품 비교</div>
-                <div class="nav-sub-item" onclick="showSection('ins-case')">사례 모음</div>
+                <div class="nav-sub-item" onclick="showSection('ins-comparison')">상품 비교 기준</div>
+                <div class="nav-sub-item" onclick="showSection('ins-case')">상담 사례 모음</div>
             </div>
         </div>
-
-        <!-- 영업 -->
         <div class="nav-category">
             <div class="nav-category-title" onclick="toggleCategory(this)">
-                <span class="nav-category-icon">🔥</span>
-                영업
-                <span class="nav-category-arrow">▶</span>
+                <span class="nav-category-icon">🔥</span> 영업 <span class="nav-category-arrow">▶</span>
             </div>
             <div class="nav-sub-list">
                 <div class="nav-sub-item" onclick="showSection('sales-db')">DB영업</div>
@@ -593,28 +181,22 @@
                 <div class="nav-sub-item" onclick="showSection('sales-closing')">클로징</div>
             </div>
         </div>
-
-        <!-- 5. 업무 가이드 -->
         <div class="nav-category">
             <div class="nav-category-title" onclick="toggleCategory(this)">
-                <span class="nav-category-icon">⚙️</span>
-                업무 가이드
-                <span class="nav-category-arrow">▶</span>
+                <span class="nav-category-icon">⚙️</span> 업무 가이드 <span class="nav-category-arrow">▶</span>
             </div>
             <div class="nav-sub-list">
+                <div class="nav-sub-item" onclick="showSection('work-consult')">상담 프로세스</div>
+                <div class="nav-sub-item" onclick="showSection('work-analysis')">보장 분석</div>
                 <div class="nav-sub-item" onclick="showSection('work-apply')">청약 절차</div>
                 <div class="nav-sub-item" onclick="showSection('work-underwriting')">언더라이팅</div>
                 <div class="nav-sub-item" onclick="showSection('work-claim')">보험금 청구</div>
                 <div class="nav-sub-item" onclick="showSection('work-complaint')">민원 처리</div>
             </div>
         </div>
-
-        <!-- 6. 회사 규정 -->
         <div class="nav-category">
             <div class="nav-category-title" onclick="toggleCategory(this)">
-                <span class="nav-category-icon">📌</span>
-                회사 규정
-                <span class="nav-category-arrow">▶</span>
+                <span class="nav-category-icon">📌</span> 회사 규정 <span class="nav-category-arrow">▶</span>
             </div>
             <div class="nav-sub-list">
                 <div class="nav-sub-item" onclick="showSection('rule-compliance')">컴플라이언스</div>
@@ -622,10 +204,19 @@
                 <div class="nav-sub-item" onclick="showSection('rule-privacy')">개인정보보호</div>
             </div>
         </div>
+        <div class="nav-category">
+            <div class="nav-category-title" onclick="toggleCategory(this)">
+                <span class="nav-category-icon">📂</span> 자료실 <span class="nav-category-arrow">▶</span>
+            </div>
+            <div class="nav-sub-list">
+                <div class="nav-sub-item" onclick="showSection('lib-forms')">필수 서식</div>
+                <div class="nav-sub-item" onclick="showSection('lib-videos')">교육 영상</div>
+                <div class="nav-sub-item" onclick="showSection('lib-links')">외부 공식 링크</div>
+                <div class="nav-sub-item" onclick="showSection('lib-faq')">FAQ</div>
+            </div>
+        </div>
     </nav>
 </aside>
-
-<!-- 메인 -->
 <div class="main">
     <div class="top-bar">
         <div class="breadcrumb" id="breadcrumb">홈</div>
@@ -634,24 +225,27 @@
             <input type="text" placeholder="매뉴얼 검색..." id="searchInput" onkeyup="searchContent()">
         </div>
     </div>
-
     <div class="content" id="content">
-
-        <!-- ==================== 홈 ==================== -->
         <div class="section active" id="section-home">
-            <h2 class="section-title">드림금융컨설팅 업무메뉴얼</h2>
-            <p class="section-desc">드림금융컨설팅의 모든 업무 정보를 한 곳에서 확인하세요.</p>
-
+            <div class="hero">
+                <h2>드림금융컨설팅 업무매뉴얼</h2>
+                <p>입사, 교육, 영업, 청약, 청구, 규정까지 한 곳에서 확인하는 사내 표준 가이드입니다.</p>
+                <div class="hero-badges">
+                    <span>업데이트 관리</span>
+                    <span>체크리스트 제공</span>
+                    <span>교육영상 연결</span>
+                </div>
+            </div>
             <div class="home-grid">
                 <div class="home-card" onclick="showSection('join-process')">
                     <div class="home-card-icon icon-blue">📋</div>
                     <h3>입사 안내</h3>
-                    <p>입사 절차, 준비 서류, 첫날 가이드, 시스템 세팅까지</p>
+                    <p>입사 절차, 준비 서류, 첫날 가이드, 시스템 세팅을 확인합니다.</p>
                 </div>
                 <div class="home-card" onclick="showSection('edu-new')">
                     <div class="home-card-icon icon-green">📚</div>
-                    <h3>교육</h3>
-                    <p>신인교육, 상품교육, 영업교육, 자격증 안내</p>
+                    <h3>교육 프로그램</h3>
+                    <p>신입 교육, 보험 기초, 상품 교육, 자격 및 필수교육 정보를 제공합니다.</p>
                 </div>
                 <div class="home-card" onclick="showSection('reward-commission')">
                     <div class="home-card-icon icon-orange">💰</div>
@@ -660,73 +254,132 @@
                 </div>
                 <div class="home-card" onclick="showSection('ins-life')">
                     <div class="home-card-icon icon-purple">🛡️</div>
-                    <h3>보험 컨텐츠</h3>
-                    <p>생명보험, 손해보험, 상품 비교, 사례 모음</p>
+                    <h3>보험 콘텐츠</h3>
+                    <p>생명보험, 손해보험, 상품 비교, 상담 사례 모음</p>
                 </div>
                 <div class="home-card" onclick="showSection('sales-db')">
                     <div class="home-card-icon icon-red">🔥</div>
                     <h3>영업</h3>
                     <p>DB영업, TA스크립트, 거절처리, AP, 클로징</p>
                 </div>
-                <div class="home-card" onclick="showSection('work-apply')">
-                    <div class="home-card-icon icon-red">⚙️</div>
+                <div class="home-card" onclick="showSection('work-consult')">
+                    <div class="home-card-icon icon-blue">⚙️</div>
                     <h3>업무 가이드</h3>
-                    <p>청약, 언더라이팅, 보험금 청구, 민원 처리</p>
+                    <p>상담, 보장 분석, 청약, 언더라이팅, 보험금 청구, 민원 처리</p>
                 </div>
                 <div class="home-card" onclick="showSection('rule-compliance')">
-                    <div class="home-card-icon icon-blue">📌</div>
+                    <div class="home-card-icon icon-gray">📌</div>
                     <h3>회사 규정</h3>
                     <p>컴플라이언스, 윤리규정, 개인정보보호</p>
+                </div>
+                <div class="home-card" onclick="showSection('lib-forms')">
+                    <div class="home-card-icon icon-purple">📂</div>
+                    <h3>자료실</h3>
+                    <p>서식, FAQ, 교육 영상, 외부 공식 자료를 모아둔 공간입니다.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== 입사 안내 ==================== -->
+
         <div class="section" id="section-join-process">
             <h2 class="section-title">입사 절차</h2>
             <p class="section-desc">드림금융컨설팅 입사부터 정착까지의 전체 과정을 안내합니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">📝</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
+            <div class="process-flow">
+                <span class="process-step">지원/면접</span><span class="process-arrow">→</span>
+                <span class="process-step">합격 안내</span><span class="process-arrow">→</span>
+                <span class="process-step">위촉/근로계약</span><span class="process-arrow">→</span>
+                <span class="process-step">자격 등록</span><span class="process-arrow">→</span>
+                <span class="process-step">계정 발급</span><span class="process-arrow">→</span>
+                <span class="process-step">필수교육 수강</span><span class="process-arrow">→</span>
+                <span class="process-step">현장 동행 시작</span>
+            </div>
+            <div class="card">
+                <h3>📋 입사 절차 상세</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>단계</th><th>내용</th><th>소요기간</th><th>비고</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="badge badge-blue">1</span></td><td>지원서 접수 및 면접</td><td>1~3일</td><td>이력서, 자기소개서</td></tr>
+                        <tr><td><span class="badge badge-blue">2</span></td><td>합격 안내 및 조건 협의</td><td>1~2일</td><td>근무조건, 보수체계 안내</td></tr>
+                        <tr><td><span class="badge badge-green">3</span></td><td>위촉 또는 근로계약 체결</td><td>당일</td><td>계약서 서명</td></tr>
+                        <tr><td><span class="badge badge-green">4</span></td><td>보험설계사 자격 등록</td><td>3~5일</td><td>금융감독원 등록</td></tr>
+                        <tr><td><span class="badge badge-orange">5</span></td><td>사내 계정 및 시스템 발급</td><td>1~2일</td><td>메일, CRM, 메신저</td></tr>
+                        <tr><td><span class="badge badge-orange">6</span></td><td>필수교육 수강</td><td>1~2주</td><td>보험연수원 등록교육</td></tr>
+                        <tr><td><span class="badge badge-purple">7</span></td><td>현장 동행 및 OJT 시작</td><td>2~4주</td><td>멘토 배정</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+            <div class="notice notice-info">
+                💡 <strong>참고:</strong> 근로계약서에는 임금, 근로시간, 휴일, 연차·유급휴가 등이 명시되어야 합니다. (고용노동부 기준)
             </div>
         </div>
 
         <div class="section" id="section-join-documents">
             <h2 class="section-title">준비 서류</h2>
             <p class="section-desc">입사 시 필요한 서류 목록과 제출 방법을 안내합니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">📄</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
+            <div class="check-box">
+                <h3>서류 체크리스트</h3>
+                <label><input type="checkbox"> 신분증 사본 (주민등록증 또는 운전면허증)</label>
+                <label><input type="checkbox"> 통장 사본 (수수료 입금용)</label>
+                <label><input type="checkbox"> 증명사진 (3x4cm, 2장)</label>
+                <label><input type="checkbox"> 자격 관련 서류 (변액/손해사정사 등)</label>
+                <label><input type="checkbox"> 비상연락망</label>
+                <label><input type="checkbox"> 개인정보 수집·이용 동의서</label>
+                <label><input type="checkbox"> 계약 관련 서류 (위촉계약서/근로계약서)</label>
+            </div>
+            <div class="notice notice-warning">
+                ⚠️ 서류 미비 시 자격 등록이 지연될 수 있으니, 합격 안내 후 <strong>3일 이내</strong> 제출을 권장합니다.
             </div>
         </div>
 
         <div class="section" id="section-join-firstday">
             <h2 class="section-title">첫날 가이드</h2>
             <p class="section-desc">입사 첫날 알아야 할 모든 것을 정리했습니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">🎯</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
+            <div class="card">
+                <h3>🎯 첫날 필수 확인 사항</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>항목</th><th>내용</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>출근 시간</strong></td><td>오전 9시 (사무실 오픈 8:30)</td></tr>
+                        <tr><td><strong>복장</strong></td><td>비즈니스 캐주얼 (첫 주는 정장 권장)</td></tr>
+                        <tr><td><strong>보고 라인</strong></td><td>팀장 → 본부장 → 대표</td></tr>
+                        <tr><td><strong>자리/사물함</strong></td><td>총무팀에서 안내</td></tr>
+                        <tr><td><strong>메신저 설치</strong></td><td>카카오워크 / 사내 메신저 (당일 설치)</td></tr>
+                        <tr><td><strong>교육 일정</strong></td><td>첫 주: 오리엔테이션 + 보험연수원 등록교육</td></tr>
+                        <tr><td><strong>멘토 지정</strong></td><td>팀장이 멘토 배정 (첫날 소개)</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+            <div class="card">
+                <h3>📌 첫 주 목표</h3>
+                <ul>
+                    <li>사내 시스템 로그인 및 사용법 숙지</li>
+                    <li>보험연수원 등록교육 시작</li>
+                    <li>팀원/멘토와 인사 및 소통 채널 확인</li>
+                    <li>기본 상품 3종 이해 (실손, 진단비, 종신)</li>
+                    <li>하루 루틴 만들기 (출근→학습→미팅→정리)</li>
+                </ul>
             </div>
         </div>
 
         <div class="section" id="section-join-systems">
             <h2 class="section-title">시스템 세팅</h2>
             <p class="section-desc">업무에 필요한 시스템 설치 및 설정 가이드입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">💻</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
+            <div class="check-box">
+                <h3>시스템 세팅 체크리스트</h3>
+                <label><input type="checkbox"> 사내 메일 계정 생성 및 로그인</label>
+                <label><input type="checkbox"> CRM 시스템 계정 발급 및 로그인</label>
+                <label><input type="checkbox"> 사내 메신저 (카카오워크) 설치 및 팀 합류</label>
+                <label><input type="checkbox"> 공용 드라이브 접근 권한 확인</label>
+                <label><input type="checkbox"> 전자서명 (공인인증서/금융인증서) 등록</label>
+                <label><input type="checkbox"> 파일명 규칙 숙지 (날짜_고객명_유형)</label>
+                <label><input type="checkbox"> 권한 신청 (필요 시 총무팀에 요청)</label>
+                <label><input type="checkbox"> 비밀번호 정책 확인 (8자+특수문자, 90일 변경)</label>
+            </div>
+            <div class="notice notice-info">
+                💡 시스템 관련 문의는 <strong>총무팀</strong> 또는 <strong>IT담당</strong>에게 연락하세요.
             </div>
         </div>
 
-        <!-- ==================== 교육 ==================== -->
         <div class="section" id="section-edu-new">
             <h2 class="section-title">신인 교육</h2>
             <p class="section-desc">드림금융컨설팅 신규 입사자를 위한 필수 교육 과정입니다.</p>
@@ -1255,14 +908,110 @@
             </div>
         </div>
 
+
+
+        <div class="section" id="section-edu-basic">
+            <h2 class="section-title">보험 기초</h2>
+            <p class="section-desc">보험업 입문자를 위한 필수 기초 지식입니다.</p>
+            <div class="summary-box">
+                <h3>3분 요약</h3>
+                <ul>
+                    <li>보험은 크게 생명보험, 손해보험, 제3보험으로 구분됩니다.</li>
+                    <li>보험료, 보험금, 약관, 증권의 기본 개념을 먼저 이해하세요.</li>
+                    <li>실손, 진단비, 수술비, 입원일당이 가장 기본적인 보장입니다.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>📂 보험의 3대 분류</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>분류</th><th>보장 대상</th><th>대표 상품</th><th>관리 기관</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="badge badge-blue">생명보험</span></td><td>사망, 노후, 교육</td><td>종신보험, 연금보험, 변액보험</td><td>생명보험협회</td></tr>
+                        <tr><td><span class="badge badge-green">손해보험</span></td><td>재물, 배상, 자동차</td><td>자동차보험, 화재보험, 배상책임보험</td><td>손해보험협회</td></tr>
+                        <tr><td><span class="badge badge-orange">제3보험</span></td><td>질병, 상해, 간병</td><td>실손보험, 암보험, 상해보험</td><td>생보/손보 공통</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+            <div class="card">
+                <h3>📖 기본 용어 정리</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>용어</th><th>설명</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>보험료</strong></td><td>계약자가 보험사에 납입하는 금액</td></tr>
+                        <tr><td><strong>보험금</strong></td><td>보험사고 발생 시 보험사가 지급하는 금액</td></tr>
+                        <tr><td><strong>약관</strong></td><td>보험계약의 내용을 정한 문서 (보장범위, 면책 등)</td></tr>
+                        <tr><td><strong>증권</strong></td><td>보험계약 체결 사실을 증명하는 문서</td></tr>
+                        <tr><td><strong>면책기간</strong></td><td>계약 후 일정 기간 동안 보장이 되지 않는 기간</td></tr>
+                        <tr><td><strong>감액기간</strong></td><td>일정 기간 보험금을 감액하여 지급하는 기간</td></tr>
+                        <tr><td><strong>갱신형</strong></td><td>일정 주기마다 보험료가 변경되는 상품</td></tr>
+                        <tr><td><strong>비갱신형</strong></td><td>보험료가 변하지 않는 상품 (초기 보험료 높음)</td></tr>
+                        <tr><td><strong>납입면제</strong></td><td>특정 조건 충족 시 이후 보험료 납입 면제</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+            <div class="card">
+                <h3>🏥 기본 보장 4대 항목</h3>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
+                    <div style="background:#eff6ff;border-radius:12px;padding:16px;">
+                        <div style="font-size:20px;margin-bottom:6px;">🩺</div>
+                        <div style="font-size:14px;font-weight:600;color:#1e40af;">실손의료보험</div>
+                        <div style="font-size:12px;color:#64748b;margin-top:6px;">실제 의료비를 보장 (본인부담금 제외)</div>
+                    </div>
+                    <div style="background:#f0fdf4;border-radius:12px;padding:16px;">
+                        <div style="font-size:20px;margin-bottom:6px;">🔬</div>
+                        <div style="font-size:14px;font-weight:600;color:#16a34a;">진단비</div>
+                        <div style="font-size:12px;color:#64748b;margin-top:6px;">암, 뇌혈관, 심장질환 진단 시 일시금</div>
+                    </div>
+                    <div style="background:#fff7ed;border-radius:12px;padding:16px;">
+                        <div style="font-size:20px;margin-bottom:6px;">🏥</div>
+                        <div style="font-size:14px;font-weight:600;color:#ea580c;">수술비</div>
+                        <div style="font-size:12px;color:#64748b;margin-top:6px;">수술 시 정액 보장</div>
+                    </div>
+                    <div style="background:#faf5ff;border-radius:12px;padding:16px;">
+                        <div style="font-size:20px;margin-bottom:6px;">🛏️</div>
+                        <div style="font-size:14px;font-weight:600;color:#9333ea;">입원일당</div>
+                        <div style="font-size:12px;color:#64748b;margin-top:6px;">입원 시 하루당 정액 지급</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>🚗 자동차보험 vs 운전자보험</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>구분</th><th>자동차보험</th><th>운전자보험</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>성격</strong></td><td>의무보험 (법적 필수)</td><td>임의보험 (선택)</td></tr>
+                        <tr><td><strong>보장</strong></td><td>대인/대물/자기신체/자차</td><td>벌금, 변호사비, 교통사고처리지원금</td></tr>
+                        <tr><td><strong>가입처</strong></td><td>손해보험사</td><td>생보/손보 모두 가능</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+        </div>
+
         <div class="section" id="section-edu-product">
             <h2 class="section-title">상품 교육</h2>
-            <p class="section-desc">취급 보험 상품에 대한 상세 교육 자료입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">📦</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
+            <p class="section-desc">보험 상품을 읽고 분석하는 방법을 안내합니다.</p>
+            <div class="card">
+                <h3>📘 상품 읽는 법</h3>
+                <ul>
+                    <li><strong>보장범위:</strong> 어떤 사고/질병이 보장되는지 확인</li>
+                    <li><strong>면책사항:</strong> 보장이 되지 않는 경우 확인 (중요!)</li>
+                    <li><strong>감액기간:</strong> 가입 후 일정기간 보험금이 줄어드는지 확인</li>
+                    <li><strong>갱신형/비갱신형:</strong> 보험료 변동 여부 확인</li>
+                    <li><strong>납입면제 조건:</strong> 어떤 조건에서 납입면제가 되는지</li>
+                    <li><strong>가입심사 포인트:</strong> 고지사항, 직업군, 나이 제한 등</li>
+                </ul>
+            </div>
+            <div class="mistake-box">
+                <h3>자주 하는 실수</h3>
+                <ul>
+                    <li>면책사항을 확인하지 않고 고객에게 "다 된다"고 설명</li>
+                    <li>갱신형/비갱신형 차이를 정확히 안내하지 않음</li>
+                    <li>감액기간 중 청구 시 고객 불만 발생</li>
+                    <li>납입면제 조건을 과장하여 설명</li>
+                </ul>
+            </div>
+            <div class="notice notice-info">
+                💡 상품별 상세 교육은 사내 교육 일정을 통해 진행됩니다. 교육 영상은 <strong>자료실 > 교육 영상</strong>에서 확인하세요.
             </div>
         </div>
 
@@ -1590,111 +1339,292 @@
             </div>
         </div>
 
-        <div class="section" id="section-edu-license">
-            <h2 class="section-title">자격증 안내</h2>
-            <p class="section-desc">보험 관련 자격증 취득 가이드입니다.</p>
 
+
+        <div class="section" id="section-edu-license">
+            <h2 class="section-title">자격/필수교육 안내</h2>
+            <p class="section-desc">보험설계사 자격 관리 및 필수 교육 이수 안내입니다.</p>
             <div class="card">
-                <h3>📋 보험 관련 자격증 한눈에 비교</h3>
-                <div style="margin-top:16px; overflow-x:auto;">
-                    <img src="insurance_cert_comparison.svg" alt="보험 관련 자격증 비교표" style="width:100%; max-width:700px; display:block; margin:0 auto;">
+                <h3>📋 필수 교육 일정</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>교육 구분</th><th>대상</th><th>주기</th><th>이수 기한</th><th>비고</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="badge badge-blue">등록교육</span></td><td>신규 설계사</td><td>최초 1회</td><td>등록 전 완료</td><td>보험연수원</td></tr>
+                        <tr><td><span class="badge badge-green">보수교육</span></td><td>전체 설계사</td><td>2년마다</td><td>등록일 기준 6개월 이내</td><td>보험연수원</td></tr>
+                        <tr><td><span class="badge badge-orange">개인정보보호교육</span></td><td>전 직원</td><td>연 1회</td><td>연말까지</td><td>사내/외부</td></tr>
+                        <tr><td><span class="badge badge-purple">컴플라이언스교육</span></td><td>전 직원</td><td>연 1회</td><td>연말까지</td><td>사내</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+            <div class="card">
+                <h3>🏆 자격증 비교</h3>
+                <div style="overflow-x:auto;margin-top:12px;">
+
+<svg width="100%" viewBox="0 0 680 1020" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<!-- 배경 헤더 -->
+<g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+<rect x="20" y="10" width="640" height="44" rx="8" stroke-width="0.5" style="fill:rgb(238, 237, 254);stroke:rgb(83, 74, 183);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="340" y="37" text-anchor="middle" dominant-baseline="central" style="fill:rgb(60, 52, 137);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">보험 관련 자격증 한눈에 비교</text>
+</g>
+
+<!-- 컬럼 헤더 -->
+<rect x="20" y="64" width="640" height="34" rx="4" fill="none" stroke="var(--color-border-secondary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.3);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="95" y="84" text-anchor="middle" dominant-baseline="central" style="font-weight:500;fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:500;text-anchor:middle;dominant-baseline:central">자격증</text>
+<text x="245" y="84" text-anchor="middle" dominant-baseline="central" style="font-weight:500;fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:500;text-anchor:middle;dominant-baseline:central">주관기관</text>
+<text x="400" y="84" text-anchor="middle" dominant-baseline="central" style="font-weight:500;fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:500;text-anchor:middle;dominant-baseline:central">시험방식</text>
+<text x="565" y="84" text-anchor="middle" dominant-baseline="central" style="font-weight:500;fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:500;text-anchor:middle;dominant-baseline:central">합격기준</text>
+<line x1="170" y1="64" x2="170" y2="98" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(0, 0, 0);stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="320" y1="64" x2="320" y2="98" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(0, 0, 0);stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="490" y1="64" x2="490" y2="98" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(0, 0, 0);stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- ① 생명보험판매 -->
+<g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+<rect x="20" y="104" width="150" height="80" rx="6" stroke-width="0.5" style="fill:rgb(225, 245, 238);stroke:rgb(15, 110, 86);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="95" y="132" text-anchor="middle" dominant-baseline="central" style="fill:rgb(8, 80, 65);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">①</text>
+<text x="95" y="152" text-anchor="middle" dominant-baseline="central" style="fill:rgb(8, 80, 65);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">생명보험</text>
+<text x="95" y="170" text-anchor="middle" dominant-baseline="central" style="fill:rgb(15, 110, 86);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">판매자격</text>
+</g>
+<rect x="170" y="104" width="150" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="245" y="134" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">생명보험협회</text>
+<text x="245" y="154" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">주관</text>
+<text x="245" y="174" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(설계사 소속회사 신청)</text>
+<rect x="320" y="104" width="170" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="400" y="124" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">OMR 객관식 4지선다</text>
+<text x="400" y="142" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">총 40문항</text>
+<text x="400" y="160" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(공통 20문 + 생보 10문)</text>
+<text x="400" y="176" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">연 12회 내외 (매월)</text>
+<rect x="490" y="104" width="170" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="575" y="132" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">100점 만점</text>
+<text x="575" y="152" text-anchor="middle" dominant-baseline="central" style="fill:#0F6E56;fill:rgb(15, 110, 86);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">60점 이상</text>
+<text x="575" y="172" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(과락 없음)</text>
+
+<!-- ② 손해보험판매 -->
+<g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+<rect x="20" y="192" width="150" height="80" rx="6" stroke-width="0.5" style="fill:rgb(230, 241, 251);stroke:rgb(24, 95, 165);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="95" y="220" text-anchor="middle" dominant-baseline="central" style="fill:rgb(12, 68, 124);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">②</text>
+<text x="95" y="240" text-anchor="middle" dominant-baseline="central" style="fill:rgb(12, 68, 124);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">손해보험</text>
+<text x="95" y="258" text-anchor="middle" dominant-baseline="central" style="fill:rgb(24, 95, 165);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">판매자격</text>
+</g>
+<rect x="170" y="192" width="150" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="245" y="222" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">손해보험협회</text>
+<text x="245" y="242" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">주관</text>
+<text x="245" y="262" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(설계사 소속회사 신청)</text>
+<rect x="320" y="192" width="170" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="400" y="214" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">OMR 객관식 4지선다</text>
+<text x="400" y="232" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">총 50문항</text>
+<text x="400" y="250" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(공통 20문 + 손보 15문</text>
+<text x="400" y="266" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">+ 제3보험 15문)</text>
+<rect x="490" y="192" width="170" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="575" y="220" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">100점 만점</text>
+<text x="575" y="240" text-anchor="middle" dominant-baseline="central" style="fill:#185FA5;fill:rgb(24, 95, 165);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">60점 이상</text>
+<text x="575" y="260" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(과목별 별도 합격)</text>
+
+<!-- ③ 제3보험판매 -->
+<g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+<rect x="20" y="280" width="150" height="80" rx="6" stroke-width="0.5" style="fill:rgb(250, 236, 231);stroke:rgb(153, 60, 29);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="95" y="308" text-anchor="middle" dominant-baseline="central" style="fill:rgb(113, 43, 19);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">③</text>
+<text x="95" y="328" text-anchor="middle" dominant-baseline="central" style="fill:rgb(113, 43, 19);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">제3보험</text>
+<text x="95" y="346" text-anchor="middle" dominant-baseline="central" style="fill:rgb(153, 60, 29);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">판매자격</text>
+</g>
+<rect x="170" y="280" width="150" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="245" y="304" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">생보·손보협회</text>
+<text x="245" y="324" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">중 선택</text>
+<text x="245" y="344" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(소속회사 협회 기준)</text>
+<rect x="320" y="280" width="170" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="400" y="300" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">손보 시험지 내 포함</text>
+<text x="400" y="318" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(공통 20문 + 제3보험 10문)</text>
+<text x="400" y="336" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">또는 생보 시험지 내 포함</text>
+<text x="400" y="354" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(별도 응시 불필요)</text>
+<rect x="490" y="280" width="170" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="575" y="304" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">100점 만점</text>
+<text x="575" y="324" text-anchor="middle" dominant-baseline="central" style="fill:#993C1D;fill:rgb(153, 60, 29);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">60점 이상</text>
+<text x="575" y="344" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(별도 합격 처리)</text>
+
+<!-- ④ 변액보험판매 -->
+<g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+<rect x="20" y="368" width="150" height="80" rx="6" stroke-width="0.5" style="fill:rgb(250, 238, 218);stroke:rgb(133, 79, 11);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="95" y="396" text-anchor="middle" dominant-baseline="central" style="fill:rgb(99, 56, 6);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">④</text>
+<text x="95" y="416" text-anchor="middle" dominant-baseline="central" style="fill:rgb(99, 56, 6);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">변액보험</text>
+<text x="95" y="434" text-anchor="middle" dominant-baseline="central" style="fill:rgb(133, 79, 11);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">판매관리사</text>
+</g>
+<rect x="170" y="368" width="150" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="245" y="396" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">생명보험협회</text>
+<text x="245" y="416" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">주관</text>
+<text x="245" y="436" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(PBT/IBT 선택)</text>
+<rect x="320" y="368" width="170" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="400" y="388" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">객관식(4지선다)·진위형(OX)</text>
+<text x="400" y="406" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">총 40문항 / 70분</text>
+<text x="400" y="424" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">연 6회(격월) PBT</text>
+<text x="400" y="442" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">또는 상설 IBT(컴퓨터시험)</text>
+<rect x="490" y="368" width="170" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="575" y="396" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">100점 만점</text>
+<text x="575" y="416" text-anchor="middle" dominant-baseline="central" style="fill:#854F0B;fill:rgb(133, 79, 11);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">70점 이상</text>
+<text x="575" y="436" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(생보판매자격 필수)</text>
+
+<!-- ⑤ IFP -->
+<g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+<rect x="20" y="456" width="150" height="80" rx="6" stroke-width="0.5" style="fill:rgb(234, 243, 222);stroke:rgb(59, 109, 17);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="95" y="484" text-anchor="middle" dominant-baseline="central" style="fill:rgb(39, 80, 10);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">⑤</text>
+<text x="95" y="504" text-anchor="middle" dominant-baseline="central" style="fill:rgb(39, 80, 10);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">IFP</text>
+<text x="95" y="522" text-anchor="middle" dominant-baseline="central" style="fill:rgb(59, 109, 17);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">종합자산관리사</text>
+</g>
+<rect x="170" y="456" width="150" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="245" y="480" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">新: 생명보험협회</text>
+<text x="245" y="498" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">舊: 손해보험협회</text>
+<text x="245" y="516" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(2022년부터 신구 병행)</text>
+<rect x="320" y="456" width="170" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="400" y="476" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">객관식, 총 100문항</text>
+<text x="400" y="494" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">120분</text>
+<text x="400" y="512" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">연 4~5회 (주말)</text>
+<text x="400" y="530" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">서울·대전 등</text>
+<rect x="490" y="456" width="170" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="575" y="476" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">과목별 40점 이상</text>
+<text x="575" y="496" text-anchor="middle" dominant-baseline="central" style="fill:#3B6D11;fill:rgb(59, 109, 17);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">총점 60점 이상</text>
+<text x="575" y="516" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(과락 있음)</text>
+
+<!-- ⑥ AFPK -->
+<g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+<rect x="20" y="544" width="150" height="80" rx="6" stroke-width="0.5" style="fill:rgb(251, 234, 240);stroke:rgb(153, 53, 86);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="95" y="572" text-anchor="middle" dominant-baseline="central" style="fill:rgb(114, 36, 62);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">⑥</text>
+<text x="95" y="592" text-anchor="middle" dominant-baseline="central" style="fill:rgb(114, 36, 62);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">AFPK</text>
+<text x="95" y="610" text-anchor="middle" dominant-baseline="central" style="fill:rgb(153, 53, 86);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">재무설계사</text>
+</g>
+<rect x="170" y="544" width="150" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="245" y="568" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">한국FPSB</text>
+<text x="245" y="586" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(한국재무설계협회)</text>
+<text x="245" y="604" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">연 3회 (3·8·11월)</text>
+<rect x="320" y="544" width="170" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="400" y="564" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">객관식</text>
+<text x="400" y="582" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">모듈1(110분) + 모듈2(100분)</text>
+<text x="400" y="600" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">하루에 연속 응시</text>
+<text x="400" y="618" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">지정교육기관 수료 필수</text>
+<rect x="490" y="544" width="170" height="80" rx="0" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="575" y="562" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">과목별 40점 이상</text>
+<text x="575" y="582" text-anchor="middle" dominant-baseline="central" style="fill:#993556;fill:rgb(153, 53, 86);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">전체 평균 70점</text>
+<text x="575" y="600" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">모듈별 부분합격 가능</text>
+<text x="575" y="618" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">(유효기간 1년)</text>
+
+<!-- 구분선 -->
+<line x1="20" y1="635" x2="660" y2="635" stroke="var(--color-border-secondary)" stroke-width="0.5" style="fill:rgb(0, 0, 0);stroke:rgba(31, 30, 29, 0.3);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="170" y1="104" x2="170" y2="635" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(0, 0, 0);stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="320" y1="104" x2="320" y2="635" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(0, 0, 0);stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="490" y1="104" x2="490" y2="635" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(0, 0, 0);stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="20" y1="192" x2="660" y2="192" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(0, 0, 0);stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="20" y1="280" x2="660" y2="280" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(0, 0, 0);stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="20" y1="368" x2="660" y2="368" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(0, 0, 0);stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="20" y1="456" x2="660" y2="456" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(0, 0, 0);stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="20" y1="544" x2="660" y2="544" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(0, 0, 0);stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<rect x="20" y="104" width="640" height="531" rx="0" fill="none" stroke="var(--color-border-secondary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.3);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- 시험 과목 상세 섹션 -->
+<g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+<rect x="20" y="650" width="640" height="34" rx="8" stroke-width="0.5" style="fill:rgb(241, 239, 232);stroke:rgb(95, 94, 90);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="340" y="672" text-anchor="middle" dominant-baseline="central" style="fill:rgb(68, 68, 65);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">시험 과목 구성 상세</text>
+</g>
+
+<!-- 생명보험 과목 -->
+<g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+<rect x="20" y="694" width="110" height="60" rx="6" stroke-width="0.5" style="fill:rgb(225, 245, 238);stroke:rgb(15, 110, 86);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="75" y="718" text-anchor="middle" dominant-baseline="central" style="fill:rgb(8, 80, 65);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">생명보험</text>
+<text x="75" y="738" text-anchor="middle" dominant-baseline="central" style="fill:rgb(15, 110, 86);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">판매자격</text>
+</g>
+<rect x="130" y="694" width="530" height="60" rx="6" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="395" y="714" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">공통1(보험일반) 10문×3점 + 공통2(보험법규·윤리) 10문×3점</text>
+<text x="395" y="736" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">+ 생명보험 과목 10문×4점 = 총 100점 만점 (합격: 60점 이상)</text>
+
+<!-- 변액보험 과목 -->
+<g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+<rect x="20" y="764" width="110" height="80" rx="6" stroke-width="0.5" style="fill:rgb(250, 238, 218);stroke:rgb(133, 79, 11);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="75" y="792" text-anchor="middle" dominant-baseline="central" style="fill:rgb(99, 56, 6);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">변액보험</text>
+<text x="75" y="810" text-anchor="middle" dominant-baseline="central" style="fill:rgb(99, 56, 6);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">판매관리사</text>
+<text x="75" y="830" text-anchor="middle" dominant-baseline="central" style="fill:rgb(133, 79, 11);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">4과목</text>
+</g>
+<rect x="130" y="764" width="530" height="80" rx="6" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="395" y="786" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">① 금융시장(채권·주식 등) 35~40% 출제</text>
+<text x="395" y="804" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">② 생명보험 개론 5~15% 출제</text>
+<text x="395" y="822" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">③ 변액보험의 이해 35~40% 출제  ④ 펀드 및 법규 일부</text>
+<text x="395" y="838" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">총 40문 / 70분 — 100점 만점 70점 이상 합격</text>
+
+<!-- IFP 과목 -->
+<g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+<rect x="20" y="854" width="110" height="80" rx="6" stroke-width="0.5" style="fill:rgb(234, 243, 222);stroke:rgb(59, 109, 17);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="75" y="882" text-anchor="middle" dominant-baseline="central" style="fill:rgb(39, 80, 10);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">IFP</text>
+<text x="75" y="900" text-anchor="middle" dominant-baseline="central" style="fill:rgb(39, 80, 10);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">종합자산</text>
+<text x="75" y="918" text-anchor="middle" dominant-baseline="central" style="fill:rgb(39, 80, 10);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">관리사</text>
+</g>
+<rect x="130" y="854" width="530" height="80" rx="6" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="395" y="876" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">① 자산관리의 이해 20문(20점)</text>
+<text x="395" y="894" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">② 금융상품Ⅰ (보장성상품 등) 50문(50점)</text>
+<text x="395" y="912" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">③ 금융상품Ⅱ (투자성상품 등) 30문(30점)</text>
+<text x="395" y="930" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">총 100문 / 120분 — 과목별 40점+전체 60점 이상 합격</text>
+
+<!-- AFPK 과목 -->
+<g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+<rect x="20" y="944" width="110" height="66" rx="6" stroke-width="0.5" style="fill:rgb(251, 234, 240);stroke:rgb(153, 53, 86);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="75" y="968" text-anchor="middle" dominant-baseline="central" style="fill:rgb(114, 36, 62);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">AFPK</text>
+<text x="75" y="988" text-anchor="middle" dominant-baseline="central" style="fill:rgb(114, 36, 62);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">모듈구성</text>
+</g>
+<rect x="130" y="944" width="530" height="66" rx="6" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:none;stroke:rgba(31, 30, 29, 0.15);color:rgb(0, 0, 0);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="395" y="963" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">모듈1 (110분): 재무설계개론·직업윤리·은퇴설계·부동산설계·상속설계</text>
+<text x="395" y="981" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">모듈2 (100분): 위험관리와보험설계·투자설계·세금설계</text>
+<text x="395" y="999" text-anchor="middle" dominant-baseline="central" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">과목별 40점 이상 + 전체 평균 70점 이상 합격 (합격유효 3년)</text>
+</svg>
+
                 </div>
             </div>
+            <div class="notice notice-warning">
+                ⚠️ 보수교육 미이수 시 <strong>설계사 자격이 정지</strong>될 수 있습니다. 기한 내 반드시 이수하세요.
+            </div>
         </div>
 
-        <!-- ==================== 보상체계 ==================== -->
+
         <div class="section" id="section-reward-commission">
             <h2 class="section-title">수수료 체계</h2>
-            <p class="section-desc">보험 종목별 수수료 구조와 지급 기준입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">💵</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
-            </div>
+            <p class="section-desc">드림금융컨설팅의 수수료 구조를 안내합니다.</p>
+            <div class="coming-soon"><div class="coming-soon-icon">💵</div><h3>컨텐츠 준비 중</h3><p>자료가 취합되면 내용이 채워집니다.</p></div>
         </div>
-
         <div class="section" id="section-reward-incentive">
             <h2 class="section-title">인센티브</h2>
-            <p class="section-desc">실적 기반 인센티브 및 보너스 제도입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">🎁</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
-            </div>
+            <p class="section-desc">성과별 인센티브 기준을 안내합니다.</p>
+            <div class="coming-soon"><div class="coming-soon-icon">🎁</div><h3>컨텐츠 준비 중</h3><p>자료가 취합되면 내용이 채워집니다.</p></div>
         </div>
-
         <div class="section" id="section-reward-promotion">
             <h2 class="section-title">승급 기준</h2>
-            <p class="section-desc">직급별 승급 요건과 경력 개발 경로입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">📈</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
-            </div>
+            <p class="section-desc">직급별 승급 요건을 안내합니다.</p>
+            <div class="coming-soon"><div class="coming-soon-icon">📈</div><h3>컨텐츠 준비 중</h3><p>자료가 취합되면 내용이 채워집니다.</p></div>
         </div>
-
         <div class="section" id="section-reward-benefit">
             <h2 class="section-title">복리후생</h2>
-            <p class="section-desc">회사에서 제공하는 복리후생 혜택입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">🏖️</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
-            </div>
+            <p class="section-desc">복리후생 제도를 안내합니다.</p>
+            <div class="coming-soon"><div class="coming-soon-icon">🎉</div><h3>컨텐츠 준비 중</h3><p>자료가 취합되면 내용이 채워집니다.</p></div>
         </div>
-
-        <!-- ==================== 보험 컨텐츠 ==================== -->
         <div class="section" id="section-ins-life">
             <h2 class="section-title">생명보험</h2>
-            <p class="section-desc">생명보험 상품 종류와 핵심 내용 정리입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">❤️</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
-            </div>
+            <p class="section-desc">생명보험 상품군 안내 및 활용 가이드입니다.</p>
+            <div class="coming-soon"><div class="coming-soon-icon">💚</div><h3>컨텐츠 준비 중</h3><p>자료가 취합되면 내용이 채워집니다.</p></div>
         </div>
-
         <div class="section" id="section-ins-general">
             <h2 class="section-title">손해보험</h2>
-            <p class="section-desc">손해보험 상품 종류와 핵심 내용 정리입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">🔧</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
-            </div>
+            <p class="section-desc">손해보험 상품군 안내 및 활용 가이드입니다.</p>
+            <div class="coming-soon"><div class="coming-soon-icon">🛡️</div><h3>컨텐츠 준비 중</h3><p>자료가 취합되면 내용이 채워집니다.</p></div>
         </div>
-
         <div class="section" id="section-ins-comparison">
-            <h2 class="section-title">상품 비교</h2>
-            <p class="section-desc">보험사별/상품별 비교 분석 자료입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">⚖️</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
-            </div>
+            <h2 class="section-title">상품 비교 기준</h2>
+            <p class="section-desc">보험 상품 비교 시 확인해야 할 기준입니다.</p>
+            <div class="coming-soon"><div class="coming-soon-icon">⚖️</div><h3>컨텐츠 준비 중</h3><p>자료가 취합되면 내용이 채워집니다.</p></div>
         </div>
-
         <div class="section" id="section-ins-case">
-            <h2 class="section-title">사례 모음</h2>
-            <p class="section-desc">실제 상담 및 보상 사례를 정리한 자료입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">📖</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
-            </div>
+            <h2 class="section-title">상담 사례 모음</h2>
+            <p class="section-desc">실제 상담 사례를 통한 학습 자료입니다.</p>
+            <div class="coming-soon"><div class="coming-soon-icon">📑</div><h3>컨텐츠 준비 중</h3><p>자료가 취합되면 내용이 채워집니다.</p></div>
         </div>
 
-        <!-- ==================== 영업 ==================== -->
-
-        <!-- DB영업 -->
         <div class="section" id="section-sales-db">
             <h2 class="section-title">DB영업</h2>
             <p class="section-desc">DB 수령부터 계약까지, 효율적인 DB영업 프로세스와 관리법입니다.</p>
@@ -2281,148 +2211,471 @@
             </div>
         </div>
 
-        <!-- ==================== 업무 가이드 ==================== -->
+
+
+        <div class="section" id="section-work-consult">
+            <h2 class="section-title">상담 프로세스</h2>
+            <p class="section-desc">고객 상담의 전체 흐름을 안내합니다.</p>
+            <div class="process-flow">
+                <span class="process-step">고객 정보 확인</span><span class="process-arrow">→</span>
+                <span class="process-step">가족/재정 현황</span><span class="process-arrow">→</span>
+                <span class="process-step">위험 진단</span><span class="process-arrow">→</span>
+                <span class="process-step">기존 보험 확인</span><span class="process-arrow">→</span>
+                <span class="process-step">보장 분석</span><span class="process-arrow">→</span>
+                <span class="process-step">상품 제안</span><span class="process-arrow">→</span>
+                <span class="process-step">청약 진행</span><span class="process-arrow">→</span>
+                <span class="process-step">사후 관리</span>
+            </div>
+            <div class="card">
+                <h3>📋 상담 단계별 가이드</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>단계</th><th>핵심 활동</th><th>확인 사항</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="badge badge-blue">1</span> 고객 정보 확인</td><td>기본 인적사항 수집</td><td>이름, 나이, 직업, 연락처</td></tr>
+                        <tr><td><span class="badge badge-blue">2</span> 가족/재정 현황</td><td>가구 구성, 소득/지출</td><td>부양가족, 월 보험료 예산</td></tr>
+                        <tr><td><span class="badge badge-blue">3</span> 위험 진단</td><td>건강/직업 리스크 파악</td><td>병력, 위험 직군 여부</td></tr>
+                        <tr><td><span class="badge badge-green">4</span> 기존 보험 확인</td><td>현재 가입 보험 분석</td><td>보장 내역, 보험료, 만기</td></tr>
+                        <tr><td><span class="badge badge-green">5</span> 보장 분석</td><td>부족/과잉 보장 파악</td><td>보장 갭 분석</td></tr>
+                        <tr><td><span class="badge badge-orange">6</span> 상품 제안</td><td>맞춤 상품 설계</td><td>예산, 우선순위 반영</td></tr>
+                        <tr><td><span class="badge badge-orange">7</span> 청약 진행</td><td>계약 체결</td><td>고지사항, 서명, 납입</td></tr>
+                        <tr><td><span class="badge badge-purple">8</span> 사후 관리</td><td>정기 리뷰, 클레임 지원</td><td>변경사항 반영, 소개 요청</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+            <div class="notice notice-success">
+                ✅ <strong>팁:</strong> 상담은 "듣기 7 : 말하기 3" 비율을 유지하세요. 고객의 니즈를 먼저 파악하는 것이 핵심입니다.
+            </div>
+        </div>
+
+        <div class="section" id="section-work-analysis">
+            <h2 class="section-title">보장 분석</h2>
+            <p class="section-desc">고객의 기존 보험을 분석하고 부족한 보장을 파악하는 방법입니다.</p>
+            <div class="card">
+                <h3>📊 보장 분석 5대 영역</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>영역</th><th>확인 항목</th><th>권장 보장</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="badge badge-red">사망 보장</span></td><td>종신, 정기, CI보험</td><td>가장: 월소득x60~120개월</td></tr>
+                        <tr><td><span class="badge badge-blue">질병 보장</span></td><td>암, 뇌, 심장 진단비</td><td>암 5,000만~1억, 뇌/심장 3,000만~5,000만</td></tr>
+                        <tr><td><span class="badge badge-green">상해 보장</span></td><td>골절, 화상, 수술비</td><td>직업/활동량에 따라 조정</td></tr>
+                        <tr><td><span class="badge badge-orange">노후 자금</span></td><td>연금, 저축성 보험</td><td>국민연금 외 추가 준비</td></tr>
+                        <tr><td><span class="badge badge-purple">가족별 우선순위</span></td><td>1인~다자녀 가구</td><td>가구 구성에 따라 조정</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+            <div class="card">
+                <h3>🎯 가족 구성별 우선순위</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>가족 구성</th><th>1순위</th><th>2순위</th><th>3순위</th></tr></thead>
+                    <tbody>
+                        <tr><td>1인 가구 (20~30대)</td><td>실손 + 진단비</td><td>상해보험</td><td>저축/연금</td></tr>
+                        <tr><td>신혼부부</td><td>실손 + 진단비</td><td>종신/정기</td><td>태아보험</td></tr>
+                        <tr><td>자녀 있는 가정</td><td>사망보장 강화</td><td>진단비 + 수술비</td><td>교육자금</td></tr>
+                        <tr><td>50대 이상</td><td>실손 + 진단비</td><td>간병/치매</td><td>연금</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+        </div>
+
         <div class="section" id="section-work-apply">
             <h2 class="section-title">청약 절차</h2>
-            <p class="section-desc">보험 청약부터 완료까지의 업무 프로세스입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">✍️</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
+            <p class="section-desc">상담부터 증권 발급까지 표준 청약 흐름을 안내합니다.</p>
+            <div class="page-meta">
+                <span>최종 업데이트: 2026-03-17</span>
+                <span>담당: 운영팀</span>
+                <span>상태: 사용 가능</span>
+            </div>
+            <div class="summary-box">
+                <h3>3분 요약</h3>
+                <ul>
+                    <li>고지사항은 누락 없이 확인합니다.</li>
+                    <li>고객 서명과 설명 이행 여부를 반드시 남깁니다.</li>
+                    <li>접수 후 증권 발급 및 후속 안내까지 완료합니다.</li>
+                </ul>
+            </div>
+            <div class="process-flow">
+                <span class="process-step">상담 준비</span><span class="process-arrow">→</span>
+                <span class="process-step">상품 설명</span><span class="process-arrow">→</span>
+                <span class="process-step">고지사항 확인</span><span class="process-arrow">→</span>
+                <span class="process-step">청약서 작성</span><span class="process-arrow">→</span>
+                <span class="process-step">서명</span><span class="process-arrow">→</span>
+                <span class="process-step">보험료 납입</span><span class="process-arrow">→</span>
+                <span class="process-step">증권 발급</span><span class="process-arrow">→</span>
+                <span class="process-step">해피콜/사후안내</span>
+            </div>
+            <div class="check-box">
+                <h3>청약 체크리스트</h3>
+                <label><input type="checkbox"> 고객 기본정보 확인</label>
+                <label><input type="checkbox"> 기존 보험 확인</label>
+                <label><input type="checkbox"> 상품 설명 완료 (상품설명서 전달)</label>
+                <label><input type="checkbox"> 고지사항 확인 (건강, 직업, 병력)</label>
+                <label><input type="checkbox"> 청약서 작성</label>
+                <label><input type="checkbox"> 서명 완료 (본인 서명 확인)</label>
+                <label><input type="checkbox"> 보험료 납입 확인</label>
+                <label><input type="checkbox"> 증권 발급 / 후속안내 전달</label>
+            </div>
+            <div class="mistake-box">
+                <h3>자주 하는 실수</h3>
+                <ul>
+                    <li>고지 항목을 구두로만 확인하고 기록을 남기지 않음</li>
+                    <li>고객 설명자료 전달 여부를 체크하지 않음</li>
+                    <li>청약 완료 후 후속 안내를 누락함</li>
+                </ul>
             </div>
         </div>
 
         <div class="section" id="section-work-underwriting">
             <h2 class="section-title">언더라이팅</h2>
-            <p class="section-desc">심사 기준과 유의사항 안내입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">🔍</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
+            <p class="section-desc">보험 가입심사(언더라이팅) 과정과 유의사항을 안내합니다.</p>
+            <div class="card">
+                <h3>📋 고지 의무 항목</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>고지 유형</th><th>내용</th><th>주의사항</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="badge badge-blue">건강 고지</span></td><td>최근 5년 입원/수술, 3개월 투약</td><td>진단서 기준 정확히 작성</td></tr>
+                        <tr><td><span class="badge badge-green">직업 고지</span></td><td>현재 직업, 위험 업무</td><td>직업급수에 따라 보험료 변동</td></tr>
+                        <tr><td><span class="badge badge-orange">유병력</span></td><td>과거 질병 이력, 완치 여부</td><td>완치 후 경과 기간 확인</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+            <div class="card">
+                <h3>📊 심사 결과 유형</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>결과</th><th>의미</th><th>대응 방법</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="badge badge-green">표준체 인수</span></td><td>정상 가입</td><td>축하 안내, 증권 발급 진행</td></tr>
+                        <tr><td><span class="badge badge-orange">부담보</span></td><td>특정 부위/질병 제외</td><td>제외 항목 고객에게 명확히 설명</td></tr>
+                        <tr><td><span class="badge badge-orange">할증</span></td><td>보험료 추가 부과</td><td>할증 사유 및 금액 안내</td></tr>
+                        <tr><td><span class="badge badge-red">거절</span></td><td>가입 불가</td><td>사유 확인 후 대안 상품 제안</td></tr>
+                        <tr><td><span class="badge badge-blue">추가서류</span></td><td>추가 정보 필요</td><td>필요 서류 안내 후 신속 제출</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+            <div class="mistake-box">
+                <h3>자주 하는 실수</h3>
+                <ul>
+                    <li>고지사항을 "괜찮겠지"라며 누락 → 추후 보험금 부지급 사유</li>
+                    <li>부담보/할증 조건을 고객에게 충분히 설명하지 않음</li>
+                    <li>추가서류 요청을 늦게 전달하여 심사 지연</li>
+                </ul>
             </div>
         </div>
 
         <div class="section" id="section-work-claim">
             <h2 class="section-title">보험금 청구</h2>
-            <p class="section-desc">보험금 청구 절차와 필요 서류 안내입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">💳</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
+            <p class="section-desc">보험금 청구 절차와 필요 서류를 안내합니다.</p>
+            <div class="process-flow">
+                <span class="process-step">사고 접수</span><span class="process-arrow">→</span>
+                <span class="process-step">서류 준비</span><span class="process-arrow">→</span>
+                <span class="process-step">청구서 제출</span><span class="process-arrow">→</span>
+                <span class="process-step">심사</span><span class="process-arrow">→</span>
+                <span class="process-step">보험금 지급</span>
+            </div>
+            <div class="card">
+                <h3>📄 공통 필요 서류</h3>
+                <ul>
+                    <li>보험금 청구서 (보험사 양식)</li>
+                    <li>신분증 사본</li>
+                    <li>통장 사본</li>
+                    <li>진단서 또는 소견서</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>📋 유형별 추가 서류</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>청구 유형</th><th>추가 서류</th></tr></thead>
+                    <tbody>
+                        <tr><td>입원/통원</td><td>진료비 계산서, 진료비 세부내역서</td></tr>
+                        <tr><td>수술</td><td>수술확인서, 조직검사결과지</td></tr>
+                        <tr><td>진단비</td><td>진단서 (확정 진단)</td></tr>
+                        <tr><td>사망</td><td>사망진단서, 가족관계증명서, 상속 서류</td></tr>
+                        <tr><td>후유장해</td><td>후유장해진단서 (6개월 이후)</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+            <div class="card">
+                <h3>💬 고객 안내 멘트</h3>
+                <div class="notice notice-info">
+                    "고객님, 보험금 청구에 필요한 서류를 안내드리겠습니다. 서류가 준비되시면 제가 직접 접수 도와드리겠습니다. 심사 기간은 보통 3~5영업일이며, 진행 상황을 수시로 안내드리겠습니다."
+                </div>
             </div>
         </div>
 
         <div class="section" id="section-work-complaint">
             <h2 class="section-title">민원 처리</h2>
-            <p class="section-desc">고객 민원 접수 및 처리 절차입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">📞</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
+            <p class="section-desc">고객 민원 발생 시 대응 절차와 가이드입니다.</p>
+            <div class="card">
+                <h3>📋 민원 처리 7단계</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>단계</th><th>내용</th><th>핵심</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="badge badge-blue">1</span></td><td>민원 접수</td><td>접수일시, 내용, 고객 요구사항 기록</td></tr>
+                        <tr><td><span class="badge badge-blue">2</span></td><td>공감 멘트</td><td>"불편을 드려 죄송합니다" — 먼저 공감</td></tr>
+                        <tr><td><span class="badge badge-green">3</span></td><td>사실 확인</td><td>계약 내용, 상담 이력, 녹취 확인</td></tr>
+                        <tr><td><span class="badge badge-green">4</span></td><td>약관 확인</td><td>관련 약관 조항 확인 및 정리</td></tr>
+                        <tr><td><span class="badge badge-orange">5</span></td><td>담당부서 전달</td><td>보험사/관련부서에 사실관계 전달</td></tr>
+                        <tr><td><span class="badge badge-orange">6</span></td><td>회신기한 관리</td><td>처리 기한 내 고객에게 경과 안내</td></tr>
+                        <tr><td><span class="badge badge-red">7</span></td><td>재민원 방지</td><td>처리 결과 기록, 유사 건 예방 조치</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+            <div class="notice notice-warning">
+                ⚠️ 민원은 <strong>24시간 이내</strong> 초기 응대가 중요합니다. 늦어질수록 고객 불만이 커집니다.
             </div>
         </div>
 
-        <!-- ==================== 회사 규정 ==================== -->
+
         <div class="section" id="section-rule-compliance">
             <h2 class="section-title">컴플라이언스</h2>
-            <p class="section-desc">보험업법 및 내부통제 관련 규정입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">⚖️</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
+            <p class="section-desc">보험모집 관련 준수사항을 안내합니다.</p>
+            <div class="card">
+                <h3>🚫 금지 행위</h3>
+                <ul class="rule-list">
+                    <li class="forbidden">허위 설명 — 상품 내용을 사실과 다르게 설명</li>
+                    <li class="forbidden">과장 광고 — 보장 내용이나 수익률을 과장</li>
+                    <li class="forbidden">고지 누락 유도 — 고객의 고지사항을 빠뜨리도록 유도</li>
+                    <li class="forbidden">대리서명 — 고객 대신 서명하는 행위</li>
+                    <li class="forbidden">증빙 없는 구두 약속 — 약관에 없는 내용을 구두로 약속</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>✅ 필수 행위</h3>
+                <ul class="rule-list">
+                    <li class="required">상품설명서를 반드시 전달하고 설명</li>
+                    <li class="required">고객의 불이익 사항을 명확히 고지</li>
+                    <li class="required">청약철회권, 품질보증해지 안내</li>
+                    <li class="required">모든 상담 내용을 CRM에 기록</li>
+                </ul>
             </div>
         </div>
 
         <div class="section" id="section-rule-ethics">
             <h2 class="section-title">윤리 규정</h2>
-            <p class="section-desc">윤리강령 및 행동규범입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">🤝</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
+            <p class="section-desc">드림금융컨설팅 임직원 윤리 규정입니다.</p>
+            <div class="card">
+                <h3>🚫 금지 행위</h3>
+                <ul class="rule-list">
+                    <li class="forbidden">고객 이익에 반하는 상품 권유</li>
+                    <li class="forbidden">타사 비방</li>
+                    <li class="forbidden">리베이트 수수 또는 제공</li>
+                    <li class="forbidden">불완전판매 (설명 의무 위반)</li>
+                    <li class="forbidden">실적 압박에 의한 정보 왜곡</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>✅ 필수 행위</h3>
+                <ul class="rule-list">
+                    <li class="required">고객 이익을 최우선으로 판단</li>
+                    <li class="required">정확한 정보에 기반한 상담</li>
+                    <li class="required">동료 간 상호 존중</li>
+                    <li class="required">위반 사항 발견 시 즉시 보고</li>
+                </ul>
             </div>
         </div>
 
         <div class="section" id="section-rule-privacy">
             <h2 class="section-title">개인정보보호</h2>
             <p class="section-desc">고객 개인정보 보호 규정 및 가이드라인입니다.</p>
-
-            <div class="coming-soon">
-                <div class="coming-soon-icon">🔒</div>
-                <h3>컨텐츠 준비 중</h3>
-                <p>자료가 취합되면 내용이 채워집니다.</p>
+            <div class="card">
+                <h3>🚫 금지 행위</h3>
+                <ul class="rule-list">
+                    <li class="forbidden">필요 이상의 개인정보 수집</li>
+                    <li class="forbidden">동의 없는 외부 공유</li>
+                    <li class="forbidden">개인기기에 고객정보 저장</li>
+                    <li class="forbidden">화면 잠금 없이 자리 비움</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>✅ 필수 행위</h3>
+                <ul class="rule-list">
+                    <li class="required">최소한의 정보만 수집 (최소 수집 원칙)</li>
+                    <li class="required">파일 암호화 (고객 데이터)</li>
+                    <li class="required">서류 파쇄 규정 준수</li>
+                    <li class="required">유출 사고 발생 시 즉시 보고</li>
+                    <li class="required">연 1회 개인정보보호 교육 이수</li>
+                </ul>
+            </div>
+            <div class="notice notice-info">
+                💡 개인정보보호 교육은 <strong>자료실 > 교육 영상</strong>에서 확인할 수 있습니다.
             </div>
         </div>
+
+
+        <div class="section" id="section-lib-forms">
+            <h2 class="section-title">필수 서식</h2>
+            <p class="section-desc">업무에 필요한 필수 서식 목록입니다.</p>
+            <div class="card">
+                <h3>📄 서식 목록</h3>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>서식명</th><th>용도</th><th>비고</th></tr></thead>
+                    <tbody>
+                        <tr><td>청약 체크리스트</td><td>청약 전 확인용</td><td>필수</td></tr>
+                        <tr><td>고객 상담 기록지</td><td>상담 내용 기록</td><td>필수</td></tr>
+                        <tr><td>보장분석 보고서</td><td>고객 보장 현황 분석</td><td>권장</td></tr>
+                        <tr><td>개인정보 동의서</td><td>정보 수집 동의</td><td>필수</td></tr>
+                        <tr><td>보험금 청구서</td><td>보험금 청구 시</td><td>보험사별 양식</td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+            <div class="notice notice-info">
+                💡 서식 파일은 <strong>공용 드라이브</strong>에서 다운로드할 수 있습니다.
+            </div>
+        </div>
+
+        <div class="section" id="section-lib-videos">
+            <h2 class="section-title">교육 영상</h2>
+            <p class="section-desc">보험 관련 교육 영상 모음입니다.</p>
+            <div class="card">
+                <h3>🔒 개인정보보호 교육</h3>
+                <ul>
+                    <li><a class="ext-link" href="https://www.youtube.com/@PIPC_kr" target="_blank">📺 개인정보보호위원회TV</a></li>
+                    <li>개인정보 보호법 주요 내용</li>
+                    <li>개인정보의 안전한 관리 및 법 해석 사례</li>
+                    <li>개인정보의 유·노출 사례 및 대응 방법</li>
+                </ul>
+                <div class="notice notice-info" style="margin-top:12px;">
+                    💡 신입 필수교육으로 권장됩니다. 개인정보보호위원회가 취급자/처리자 대상 입문과정으로 제공합니다.
+                </div>
+            </div>
+            <div class="card">
+                <h3>📘 보험 기본개념</h3>
+                <ul>
+                    <li><a class="ext-link" href="https://www.youtube.com/@KLIAtv" target="_blank">📺 생명보험협회 YouTube</a></li>
+                    <li>탄탄한 생명보험 기본기 시리즈</li>
+                    <li>제3보험 관련 기초 영상</li>
+                    <li>연금보험/종신보험 등 개념형 영상</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🚗 자동차보험/손해보험</h3>
+                <ul>
+                    <li><a class="ext-link" href="https://www.youtube.com/@kaborTV" target="_blank">📺 손해보험협회 YouTube</a></li>
+                    <li>자동차보험 약관 해설 (종합편)</li>
+                    <li>보험모집질서 및 보험대리점 운영 관련 준수사항 교육</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="section-lib-links">
+            <h2 class="section-title">외부 공식 링크</h2>
+            <p class="section-desc">업무에 도움이 되는 외부 공식 사이트 모음입니다.</p>
+            <div class="card">
+                <h3>🏛️ 금융/보험 기관</h3>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+                    <a class="ext-link" href="https://www.fss.or.kr" target="_blank">🔗 금융감독원</a>
+                    <a class="ext-link" href="https://www.klia.or.kr" target="_blank">🔗 생명보험협회</a>
+                    <a class="ext-link" href="https://www.knia.or.kr" target="_blank">🔗 손해보험협회</a>
+                    <a class="ext-link" href="https://www.in-edu.or.kr" target="_blank">🔗 보험연수원</a>
+                    <a class="ext-link" href="https://www.pipc.go.kr" target="_blank">🔗 개인정보보호위원회</a>
+                </div>
+            </div>
+            <div class="card">
+                <h3>📚 교육/학습</h3>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+                    <a class="ext-link" href="https://edu.privacy.go.kr" target="_blank">🔗 개인정보배움터</a>
+                    <a class="ext-link" href="https://www.moel.go.kr" target="_blank">🔗 고용노동부</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="section-lib-faq">
+            <h2 class="section-title">FAQ</h2>
+            <p class="section-desc">자주 묻는 질문과 답변 모음입니다.</p>
+            <div class="card">
+                <h3>❓ 입사/자격 관련</h3>
+                <div style="margin-top:12px;">
+                    <details style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:8px;">
+                        <summary style="font-weight:600;cursor:pointer;">보험설계사 자격 등록은 얼마나 걸리나요?</summary>
+                        <p style="margin-top:10px;padding-left:12px;font-size:14px;color:#475569;">신규 등록교육 이수 후 금융감독원에 등록하며, 보통 3~5영업일이 소요됩니다.</p>
+                    </details>
+                    <details style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:8px;">
+                        <summary style="font-weight:600;cursor:pointer;">보수교육은 언제까지 이수해야 하나요?</summary>
+                        <p style="margin-top:10px;padding-left:12px;font-size:14px;color:#475569;">등록일 기준 2년마다, 해당 기한 내 6개월 이내에 이수해야 합니다.</p>
+                    </details>
+                    <details style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:8px;">
+                        <summary style="font-weight:600;cursor:pointer;">변액보험 판매를 위해 별도 자격이 필요한가요?</summary>
+                        <p style="margin-top:10px;padding-left:12px;font-size:14px;color:#475569;">네, 변액보험판매관리사 자격이 별도로 필요합니다. 보험연수원에서 시험을 응시할 수 있습니다.</p>
+                    </details>
+                </div>
+            </div>
+            <div class="card">
+                <h3>❓ 업무 관련</h3>
+                <div style="margin-top:12px;">
+                    <details style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:8px;">
+                        <summary style="font-weight:600;cursor:pointer;">고객이 청약 철회를 요청하면?</summary>
+                        <p style="margin-top:10px;padding-left:12px;font-size:14px;color:#475569;">청약일로부터 15일(보험증권 수령일로부터 15일) 이내에 청약 철회가 가능합니다. 보험사에 즉시 접수하세요.</p>
+                    </details>
+                    <details style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:8px;">
+                        <summary style="font-weight:600;cursor:pointer;">보험금 청구 시 고객에게 뭐라고 안내하나요?</summary>
+                        <p style="margin-top:10px;padding-left:12px;font-size:14px;color:#475569;">"필요 서류를 안내드리겠습니다. 서류 준비되시면 제가 직접 접수 도와드리며, 심사 기간(3~5영업일)동안 진행 상황을 수시로 안내드리겠습니다."</p>
+                    </details>
+                    <details style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:8px;">
+                        <summary style="font-weight:600;cursor:pointer;">민원이 들어오면 어떻게 대응하나요?</summary>
+                        <p style="margin-top:10px;padding-left:12px;font-size:14px;color:#475569;">24시간 이내 초기 응대 → 공감 표현 → 사실 확인 → 약관 확인 → 담당부서 전달 → 기한 내 회신. 업무가이드 > 민원 처리를 참고하세요.</p>
+                    </details>
+                </div>
+            </div>
+        </div>
+
 
     </div>
 </div>
 
 <script>
-    // 섹션 이름 매핑
     const sectionNames = {
         'home': '홈',
         'join-process': '입사 안내 > 입사 절차',
         'join-documents': '입사 안내 > 준비 서류',
         'join-firstday': '입사 안내 > 첫날 가이드',
         'join-systems': '입사 안내 > 시스템 세팅',
-        'edu-new': '교육 > 신인 교육',
-        'edu-product': '교육 > 상품 교육',
-        'edu-sales': '교육 > 영업 교육',
-        'edu-license': '교육 > 자격증 안내',
+        'edu-new': '교육 프로그램 > 신입 교육',
+        'edu-basic': '교육 프로그램 > 보험 기초',
+        'edu-product': '교육 프로그램 > 상품 교육',
+        'edu-sales': '교육 프로그램 > 영업 교육',
+        'edu-license': '교육 프로그램 > 자격/필수교육 안내',
         'reward-commission': '보상체계 > 수수료 체계',
         'reward-incentive': '보상체계 > 인센티브',
         'reward-promotion': '보상체계 > 승급 기준',
         'reward-benefit': '보상체계 > 복리후생',
-        'ins-life': '보험 컨텐츠 > 생명보험',
-        'ins-general': '보험 컨텐츠 > 손해보험',
-        'ins-comparison': '보험 컨텐츠 > 상품 비교',
-        'ins-case': '보험 컨텐츠 > 사례 모음',
+        'ins-life': '보험 콘텐츠 > 생명보험',
+        'ins-general': '보험 콘텐츠 > 손해보험',
+        'ins-comparison': '보험 콘텐츠 > 상품 비교 기준',
+        'ins-case': '보험 콘텐츠 > 상담 사례 모음',
         'sales-db': '영업 > DB영업',
         'sales-ta': '영업 > TA 스크립트',
         'sales-reject': '영업 > 거절처리 화법',
         'sales-ap-script': '영업 > AP 스크립트',
         'sales-ap-material': '영업 > AP 자료',
         'sales-closing': '영업 > 클로징',
+        'work-consult': '업무 가이드 > 상담 프로세스',
+        'work-analysis': '업무 가이드 > 보장 분석',
         'work-apply': '업무 가이드 > 청약 절차',
         'work-underwriting': '업무 가이드 > 언더라이팅',
         'work-claim': '업무 가이드 > 보험금 청구',
         'work-complaint': '업무 가이드 > 민원 처리',
         'rule-compliance': '회사 규정 > 컴플라이언스',
         'rule-ethics': '회사 규정 > 윤리 규정',
-        'rule-privacy': '회사 규정 > 개인정보보호'
+        'rule-privacy': '회사 규정 > 개인정보보호',
+        'lib-forms': '자료실 > 필수 서식',
+        'lib-videos': '자료실 > 교육 영상',
+        'lib-links': '자료실 > 외부 공식 링크',
+        'lib-faq': '자료실 > FAQ'
     };
 
-    // 섹션 보여주기
     function showSection(id) {
-        // 모든 섹션 숨기기
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-
-        // 선택한 섹션 보여주기
         const section = document.getElementById('section-' + id);
         if (section) section.classList.add('active');
-
-        // 브레드크럼 업데이트
         const name = sectionNames[id] || id;
         document.getElementById('breadcrumb').innerHTML = name.replace(' > ', ' <span style="color:#cbd5e1;margin:0 6px">›</span> ');
-
-        // 네비게이션 활성화
         document.querySelectorAll('.nav-category-title').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.nav-sub-item').forEach(s => s.classList.remove('active'));
-
         if (id === 'home') {
             document.querySelector('.nav-category-title').classList.add('active');
         } else {
-            // 해당 서브 아이템 활성화
             document.querySelectorAll('.nav-sub-item').forEach(item => {
                 if (item.getAttribute('onclick') === "showSection('" + id + "')") {
                     item.classList.add('active');
-                    // 부모 카테고리 열기
                     const subList = item.parentElement;
                     subList.classList.add('open');
                     const categoryTitle = subList.previousElementSibling;
@@ -2431,60 +2684,39 @@
                 }
             });
         }
-
-        // 모바일: 사이드바 닫기
         document.getElementById('sidebar').classList.remove('open');
-
-        // 스크롤 맨 위로
         window.scrollTo(0, 0);
     }
 
-    // 카테고리 토글
     function toggleCategory(el) {
         const subList = el.nextElementSibling;
         const isOpen = subList.classList.contains('open');
-
-        if (isOpen) {
-            subList.classList.remove('open');
-            el.classList.remove('open');
-        } else {
-            subList.classList.add('open');
-            el.classList.add('open');
-        }
+        if (isOpen) { subList.classList.remove('open'); el.classList.remove('open'); }
+        else { subList.classList.add('open'); el.classList.add('open'); }
     }
 
-    // 모바일 사이드바 토글
     function toggleSidebar() {
         document.getElementById('sidebar').classList.toggle('open');
     }
 
-    // 검색
     function searchContent() {
         const query = document.getElementById('searchInput').value.toLowerCase().trim();
         if (!query) return;
-
         const results = [];
         document.querySelectorAll('.section').forEach(section => {
             const text = section.textContent.toLowerCase();
             if (text.includes(query)) {
                 const id = section.id.replace('section-', '');
                 const name = sectionNames[id];
-                if (name && id !== 'home') {
-                    results.push({ id, name });
-                }
+                if (name && id !== 'home') results.push({ id, name });
             }
         });
-
-        if (results.length > 0) {
-            showSection(results[0].id);
-        }
+        if (results.length > 0) showSection(results[0].id);
     }
 
-    // Enter로 검색
     document.getElementById('searchInput').addEventListener('keydown', function(e) {
         if (e.key === 'Enter') searchContent();
     });
 </script>
-
 </body>
 </html>
